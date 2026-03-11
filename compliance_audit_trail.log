@@ -1,0 +1,1 @@
+{"timestamp": "2026-03-10 09:58:48,672", "event": "{"action": "SIGNAL_GENERATED", "ticker": "BAC", "prev_close": 47.9, "gap_ratio": 0.0079, "threshold_used": 0.005, "reason": "Gap of 0.79% passed threshold of 0.50%"}"}
