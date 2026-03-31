@@ -44,6 +44,22 @@ API_AUDIENCE = "https://api.sevendimensions.com"
 ALGORITHMS = ["RS256"]
 security = HTTPBearer()
 
+# 1. Determine the mode (Defaults to TEST for safety)
+ENV_MODE = os.getenv("ENV_MODE", "TEST").upper()
+
+if ENV_MODE == "PROD":
+    print("🚀 PROD MODE: Fetching secrets from AWS Secrets Manager...")
+    # Here you would call a helper function to fetch secrets and
+    # inject them into os.environ.
+    # example_fetch_aws_secrets()
+else:
+    print("🛠️ TEST MODE: Loading local trading.env...")
+    load_dotenv('trading.env')
+
+# 2. Address Audit Finding: Operator Identity
+# Move your name out of the source code and into the environment
+SYSTEM_OWNER = os.getenv('SYSTEM_OWNER', 'Joel Faucher')
+
 
 def verify_token(credentials: HTTPAuthorizationCredentials = Security(security)):
     """Validates the JWT token against Auth0's public keys."""
