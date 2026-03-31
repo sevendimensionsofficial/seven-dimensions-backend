@@ -1,1 +1,13 @@
 {"timestamp": "2026-03-10 09:58:48,672", "event": "{"action": "SIGNAL_GENERATED", "ticker": "BAC", "prev_close": 47.9, "gap_ratio": 0.0079, "threshold_used": 0.005, "reason": "Gap of 0.79% passed threshold of 0.50%"}"}
+{"timestamp": "2026-03-16 10:21:35,332", "event": "{"action": "SIGNAL_GENERATED", "ticker": "AAPL", "prev_close": 250.12, "gap_ratio": 0.0079, "threshold_used": 0.005, "reason": "Gap of 0.79% passed threshold of 0.50%"}"}
+{"timestamp": "2026-03-17 09:51:13,362", "event": "{"action": "SIGNAL_GENERATED", "ticker": "DIS", "prev_close": 98.66, "gap_ratio": 0.0052, "threshold_used": 0.005, "reason": "Gap of 0.52% passed threshold of 0.50%"}"}
+{"timestamp": "2026-03-17 09:51:14,859", "event": "{"action": "SIGNAL_GENERATED", "ticker": "SBUX", "prev_close": 97.82, "gap_ratio": 0.0078, "threshold_used": 0.005, "reason": "Gap of 0.78% passed threshold of 0.50%"}"}
+{"timestamp": "2026-03-17 09:51:15,673", "event": "{"action": "SIGNAL_GENERATED", "ticker": "JPM", "prev_close": 286.16, "gap_ratio": 0.0099, "threshold_used": 0.005, "reason": "Gap of 0.99% passed threshold of 0.50%"}"}
+{"timestamp": "2026-03-23 09:58:33,829", "event": "{"action": "SIGNAL_GENERATED", "ticker": "DIS", "prev_close": 99.51, "gap_ratio": 0.0071, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:36,912", "event": "{"action": "SIGNAL_GENERATED", "ticker": "MSFT", "prev_close": 381.87, "gap_ratio": 0.0054, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:37,642", "event": "{"action": "SIGNAL_GENERATED", "ticker": "COIN", "prev_close": 197.5, "gap_ratio": 0.0056, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:39,209", "event": "{"action": "SIGNAL_GENERATED", "ticker": "MDT", "prev_close": 86.16, "gap_ratio": 0.0125, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:39,999", "event": "{"action": "SIGNAL_GENERATED", "ticker": "MDLZ", "prev_close": 56.21, "gap_ratio": 0.0116, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:43,164", "event": "{"action": "SIGNAL_GENERATED", "ticker": "KO", "prev_close": 74.75, "gap_ratio": 0.0079, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:43,986", "event": "{"action": "SIGNAL_GENERATED", "ticker": "JNJ", "prev_close": 235.37, "gap_ratio": 0.0086, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}
+{"timestamp": "2026-03-23 09:58:45,574", "event": "{"action": "SIGNAL_GENERATED", "ticker": "V", "prev_close": 301.62, "gap_ratio": 0.0119, "threshold_used": 0.005, "reason": "Gap passed threshold"}"}

@@ -1,0 +1,522 @@
+2026-03-18 [Tessa] [09:35:30] Config updated.
+2026-03-18 [Tessa] [09:35:30] Autonomous Engine Started.
+2026-03-18 [Tessa] [09:35:53] Executing trades for 25 approved targets.
+2026-03-18 [Tessa] [09:35:54] 🟢 Placed LMT1_OPEN for SAIL: Entry $13.15 | TP $13.61 | SL $12.76
+2026-03-18 [Tessa] [09:35:54] 🟢 Placed LMT2_DIP for SAIL: Entry $12.96 | TP $13.41 | SL $12.57
+2026-03-18 [Tessa] [09:35:55] 🟢 Placed LMT1_OPEN for SBSW: Entry $12.11 | TP $12.53 | SL $11.75
+2026-03-18 [Tessa] [09:35:56] 🟢 Placed LMT2_DIP for SBSW: Entry $11.93 | TP $12.35 | SL $11.57
+2026-03-18 [Tessa] [09:35:56] 🟢 Placed LMT1_OPEN for GFI: Entry $42.4 | TP $43.88 | SL $41.13
+2026-03-18 [Tessa] [09:35:57] 🟢 Placed LMT2_DIP for GFI: Entry $41.76 | TP $43.22 | SL $40.51
+2026-03-18 [Tessa] [09:35:58] 🟢 Placed LMT1_OPEN for HMY: Entry $14.46 | TP $14.97 | SL $14.03
+2026-03-18 [Tessa] [09:35:58] 🟢 Placed LMT2_DIP for HMY: Entry $14.24 | TP $14.74 | SL $13.81
+2026-03-18 [Tessa] [09:35:59] 🟢 Placed LMT1_OPEN for KGC: Entry $29.15 | TP $30.17 | SL $28.28
+2026-03-18 [Tessa] [09:35:59] 🟢 Placed LMT2_DIP for KGC: Entry $28.72 | TP $29.73 | SL $27.86
+2026-03-18 [Tessa] [09:36:00] 🟢 Placed LMT1_OPEN for SSRM: Entry $26.28 | TP $27.2 | SL $25.49
+2026-03-18 [Tessa] [09:36:01] 🟢 Placed LMT2_DIP for SSRM: Entry $25.89 | TP $26.8 | SL $25.11
+2026-03-18 [Tessa] [09:36:01] 🟢 Placed LMT1_OPEN for PAAS: Entry $51.58 | TP $53.39 | SL $50.03
+2026-03-18 [Tessa] [09:36:02] 🟢 Placed LMT2_DIP for PAAS: Entry $50.81 | TP $52.59 | SL $49.29
+2026-03-18 [Tessa] [09:36:03] 🟢 Placed LMT1_OPEN for AUGO: Entry $74.85 | TP $77.47 | SL $72.6
+2026-03-18 [Tessa] [09:36:03] 🟢 Placed LMT2_DIP for AUGO: Entry $73.73 | TP $76.31 | SL $71.52
+2026-03-18 [Tessa] [09:36:04] 🟢 Placed LMT1_OPEN for PPTA: Entry $28.95 | TP $29.96 | SL $28.08
+2026-03-18 [Tessa] [09:36:04] 🟢 Placed LMT2_DIP for PPTA: Entry $28.52 | TP $29.52 | SL $27.66
+2026-03-18 [Tessa] [09:36:05] 🟢 Placed LMT1_OPEN for CDE: Entry $19.6 | TP $20.29 | SL $19.01
+2026-03-18 [Tessa] [09:36:06] 🟢 Placed LMT2_DIP for CDE: Entry $19.31 | TP $19.99 | SL $18.73
+2026-03-18 [Tessa] [09:36:07] 🟢 Placed LMT1_OPEN for ORLA: Entry $14.96 | TP $15.48 | SL $14.51
+2026-03-18 [Tessa] [09:36:07] 🟢 Placed LMT2_DIP for ORLA: Entry $14.74 | TP $15.26 | SL $14.3
+2026-03-18 [Tessa] [09:36:08] 🟢 Placed LMT1_OPEN for SKE: Entry $27.8 | TP $28.77 | SL $26.97
+2026-03-18 [Tessa] [09:36:08] 🟢 Placed LMT2_DIP for SKE: Entry $27.39 | TP $28.35 | SL $26.57
+2026-03-18 [Tessa] [09:36:09] 🟢 Placed LMT1_OPEN for IAG: Entry $18.16 | TP $18.8 | SL $17.62
+2026-03-18 [Tessa] [09:36:10] 🟢 Placed LMT2_DIP for IAG: Entry $17.89 | TP $18.52 | SL $17.35
+2026-03-18 [Tessa] [09:36:10] 🟢 Placed LMT1_OPEN for AGI: Entry $42.91 | TP $44.41 | SL $41.62
+2026-03-18 [Tessa] [09:36:11] 🟢 Placed LMT2_DIP for AGI: Entry $42.26 | TP $43.74 | SL $40.99
+2026-03-18 [Tessa] [09:36:12] 🟢 Placed LMT1_OPEN for EQX: Entry $13.69 | TP $14.17 | SL $13.28
+2026-03-18 [Tessa] [09:36:12] 🟢 Placed LMT2_DIP for EQX: Entry $13.48 | TP $13.95 | SL $13.08
+2026-03-18 [Tessa] [09:36:13] 🟢 Placed LMT1_OPEN for JBL: Entry $246.79 | TP $255.43 | SL $239.39
+2026-03-18 [Tessa] [09:36:13] 🟢 Placed LMT2_DIP for JBL: Entry $243.09 | TP $251.6 | SL $235.8
+2026-03-18 [Tessa] [09:36:14] 🟢 Placed LMT1_OPEN for SVM: Entry $10.21 | TP $10.57 | SL $9.9
+2026-03-18 [Tessa] [09:36:15] 🟢 Placed LMT2_DIP for SVM: Entry $10.06 | TP $10.41 | SL $9.76
+2026-03-18 [Tessa] [09:36:15] 🟢 Placed LMT1_OPEN for B: Entry $40.45 | TP $41.87 | SL $39.24
+2026-03-18 [Tessa] [09:36:16] 🟢 Placed LMT2_DIP for B: Entry $39.84 | TP $41.23 | SL $38.64
+2026-03-18 [Tessa] [09:36:17] 🟢 Placed LMT1_OPEN for AEM: Entry $198.76 | TP $205.72 | SL $192.8
+2026-03-18 [Tessa] [09:36:17] 🟢 Placed LMT2_DIP for AEM: Entry $195.78 | TP $202.63 | SL $189.91
+2026-03-18 [Tessa] [09:36:18] 🟢 Placed LMT1_OPEN for TFPM: Entry $34.44 | TP $35.65 | SL $33.41
+2026-03-18 [Tessa] [09:36:19] 🟢 Placed LMT2_DIP for TFPM: Entry $33.92 | TP $35.11 | SL $32.9
+2026-03-18 [Tessa] [09:36:19] 🟢 Placed LMT1_OPEN for CGAU: Entry $17.59 | TP $18.21 | SL $17.06
+2026-03-18 [Tessa] [09:36:20] 🟢 Placed LMT2_DIP for CGAU: Entry $17.32 | TP $17.93 | SL $16.8
+2026-03-18 [Tessa] [09:36:21] 🟢 Placed LMT1_OPEN for WPM: Entry $129.98 | TP $134.53 | SL $126.08
+2026-03-18 [Tessa] [09:36:21] 🟢 Placed LMT2_DIP for WPM: Entry $128.03 | TP $132.51 | SL $124.19
+2026-03-18 [Tessa] [09:36:22] 🟢 Placed LMT1_OPEN for OR: Entry $37.42 | TP $38.73 | SL $36.3
+2026-03-18 [Tessa] [09:36:22] 🟢 Placed LMT2_DIP for OR: Entry $36.86 | TP $38.15 | SL $35.75
+2026-03-18 [Tessa] [09:36:23] 🟢 Placed LMT1_OPEN for ERO: Entry $25.53 | TP $26.42 | SL $24.76
+2026-03-18 [Tessa] [09:36:24] 🟢 Placed LMT2_DIP for ERO: Entry $25.15 | TP $26.03 | SL $24.4
+2026-03-18 [Tessa] [09:36:24] 🟢 Placed LMT1_OPEN for ARIS: Entry $17.74 | TP $18.36 | SL $17.21
+2026-03-18 [Tessa] [09:36:25] 🟢 Placed LMT2_DIP for ARIS: Entry $17.47 | TP $18.08 | SL $16.95
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SAIL
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SAIL
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SBSW
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SBSW
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for GFI
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for GFI
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for HMY
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for HMY
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for KGC
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for KGC
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SSRM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SSRM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for PAAS
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for PAAS
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AUGO
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AUGO
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for PPTA
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for PPTA
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for CDE
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for CDE
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for ORLA
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for ORLA
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SKE
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SKE
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for IAG
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for IAG
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AGI
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AGI
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for EQX
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for EQX
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for JBL
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for JBL
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SVM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for SVM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for B
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for B
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AEM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AEM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for TFPM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for TFPM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for CGAU
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for CGAU
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for WPM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for WPM
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for OR
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for OR
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for ERO
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for ERO
+2026-03-18 [Tessa] [11:30:10] ⏰ 11:30 Failsafe: Cancelled unfilled entry for ARIS
+2026-03-19 [Tessa] [09:35:19] Config updated.
+2026-03-19 [Tessa] [09:35:19] Autonomous Engine Started.
+2026-03-19 [Tessa] [09:35:41] Executing trades for top 10 approved targets.
+2026-03-19 [Tessa] [09:35:41] 🛡️ PILOT MODE ACTIVE: Reducing ALM orders to 1 share.
+2026-03-19 [Tessa] [09:35:42] 🟢 Placed LMT1_OPEN for ALM: Entry $15.52 | TP $16.06 | SL $15.05
+2026-03-19 [Tessa] [09:35:42] 🟢 Placed LMT2_DIP for ALM: Entry $15.29 | TP $15.83 | SL $14.83
+2026-03-19 [Tessa] [09:35:43] 🛡️ PILOT MODE ACTIVE: Reducing SBSW orders to 1 share.
+2026-03-19 [Tessa] [09:35:43] 🟢 Placed LMT1_OPEN for SBSW: Entry $11.08 | TP $11.47 | SL $10.75
+2026-03-19 [Tessa] [09:35:44] 🟢 Placed LMT2_DIP for SBSW: Entry $10.91 | TP $11.29 | SL $10.58
+2026-03-19 [Tessa] [09:35:44] 🛡️ PILOT MODE ACTIVE: Reducing AUGO orders to 1 share.
+2026-03-19 [Tessa] [09:35:44] 🟢 Placed LMT1_OPEN for AUGO: Entry $65.6 | TP $67.9 | SL $63.63
+2026-03-19 [Tessa] [09:35:45] 🟢 Placed LMT2_DIP for AUGO: Entry $64.62 | TP $66.88 | SL $62.68
+2026-03-19 [Tessa] [09:35:45] 🛡️ PILOT MODE ACTIVE: Reducing SKE orders to 1 share.
+2026-03-19 [Tessa] [09:35:46] 🟢 Placed LMT1_OPEN for SKE: Entry $25.89 | TP $26.8 | SL $25.11
+2026-03-19 [Tessa] [09:35:46] 🟢 Placed LMT2_DIP for SKE: Entry $25.5 | TP $26.39 | SL $24.73
+2026-03-19 [Tessa] [09:35:47] 🛡️ PILOT MODE ACTIVE: Reducing GFI orders to 1 share.
+2026-03-19 [Tessa] [09:35:47] 🟢 Placed LMT1_OPEN for GFI: Entry $38.93 | TP $40.29 | SL $37.76
+2026-03-19 [Tessa] [09:35:48] 🟢 Placed LMT2_DIP for GFI: Entry $38.35 | TP $39.69 | SL $37.2
+2026-03-19 [Tessa] [09:35:48] 🛡️ PILOT MODE ACTIVE: Reducing ERO orders to 1 share.
+2026-03-19 [Tessa] [09:35:48] 🟢 Placed LMT1_OPEN for ERO: Entry $22.82 | TP $23.62 | SL $22.14
+2026-03-19 [Tessa] [09:35:49] 🟢 Placed LMT2_DIP for ERO: Entry $22.48 | TP $23.27 | SL $21.81
+2026-03-19 [Tessa] [09:35:49] 🛡️ PILOT MODE ACTIVE: Reducing ARIS orders to 1 share.
+2026-03-19 [Tessa] [09:35:50] 🟢 Placed LMT1_OPEN for ARIS: Entry $16.2 | TP $16.77 | SL $15.71
+2026-03-19 [Tessa] [09:35:50] 🟢 Placed LMT2_DIP for ARIS: Entry $15.96 | TP $16.52 | SL $15.48
+2026-03-19 [Tessa] [09:35:50] 🛡️ PILOT MODE ACTIVE: Reducing HBM orders to 1 share.
+2026-03-19 [Tessa] [09:35:51] 🟢 Placed LMT1_OPEN for HBM: Entry $18.25 | TP $18.89 | SL $17.7
+2026-03-19 [Tessa] [09:35:51] 🟢 Placed LMT2_DIP for HBM: Entry $17.98 | TP $18.61 | SL $17.44
+2026-03-19 [Tessa] [09:35:52] 🛡️ PILOT MODE ACTIVE: Reducing PAAS orders to 1 share.
+2026-03-19 [Tessa] [09:35:52] 🟢 Placed LMT1_OPEN for PAAS: Entry $47.58 | TP $49.25 | SL $46.15
+2026-03-19 [Tessa] [09:35:53] 🟢 Placed LMT2_DIP for PAAS: Entry $46.87 | TP $48.51 | SL $45.46
+2026-03-19 [Tessa] [09:35:53] 🛡️ PILOT MODE ACTIVE: Reducing PPTA orders to 1 share.
+2026-03-19 [Tessa] [09:35:54] 🟢 Placed LMT1_OPEN for PPTA: Entry $26.25 | TP $27.17 | SL $25.46
+2026-03-19 [Tessa] [09:35:54] 🟢 Placed LMT2_DIP for PPTA: Entry $25.85 | TP $26.75 | SL $25.07
+2026-03-19 [Tessa] [09:37:21] Config updated.
+2026-03-19 [Tessa] [09:39:28] Config updated.
+2026-03-19 [Tessa] [09:41:17] Config updated.
+2026-03-19 [Tessa] [09:41:17] Autonomous Engine Started.
+2026-03-19 [Tessa] [09:41:38] Executing trades for top 10 approved targets.
+2026-03-19 [Tessa] [09:41:39] 🟢 Placed LMT1_OPEN for SBSW: Entry $10.98 | TP $11.36 | SL $10.65
+2026-03-19 [Tessa] [09:41:39] 🟢 Placed LMT2_DIP for SBSW: Entry $10.82 | TP $11.2 | SL $10.5
+2026-03-19 [Tessa] [09:41:40] 🟢 Placed LMT1_OPEN for AA: Entry $56.66 | TP $58.64 | SL $54.96
+2026-03-19 [Tessa] [09:41:41] 🟢 Placed LMT2_DIP for AA: Entry $55.81 | TP $57.76 | SL $54.14
+2026-03-19 [Tessa] [09:41:41] 🟢 Placed LMT1_OPEN for PSLV: Entry $21.86 | TP $22.63 | SL $21.2
+2026-03-19 [Tessa] [09:41:42] 🟢 Placed LMT2_DIP for PSLV: Entry $21.53 | TP $22.28 | SL $20.88
+2026-03-19 [Tessa] [09:41:42] 🟢 Placed LMT1_OPEN for ALM: Entry $15.88 | TP $16.44 | SL $15.4
+2026-03-19 [Tessa] [09:41:43] 🟢 Placed LMT2_DIP for ALM: Entry $15.64 | TP $16.19 | SL $15.17
+2026-03-19 [Tessa] [09:41:44] 🟢 Placed LMT1_OPEN for ARIS: Entry $15.78 | TP $16.33 | SL $15.31
+2026-03-19 [Tessa] [09:41:44] 🟢 Placed LMT2_DIP for ARIS: Entry $15.54 | TP $16.08 | SL $15.07
+2026-03-19 [Tessa] [09:41:45] 🟢 Placed LMT1_OPEN for HL: Entry $16.59 | TP $17.17 | SL $16.09
+2026-03-19 [Tessa] [09:41:45] 🟢 Placed LMT2_DIP for HL: Entry $16.35 | TP $16.92 | SL $15.86
+2026-03-19 [Tessa] [09:41:46] 🟢 Placed LMT1_OPEN for HBM: Entry $17.98 | TP $18.61 | SL $17.44
+2026-03-19 [Tessa] [09:41:47] 🟢 Placed LMT2_DIP for HBM: Entry $17.71 | TP $18.33 | SL $17.18
+2026-03-19 [Tessa] [09:41:47] 🟢 Placed LMT1_OPEN for AUGO: Entry $65.47 | TP $67.76 | SL $63.51
+2026-03-19 [Tessa] [09:41:48] 🟢 Placed LMT2_DIP for AUGO: Entry $64.49 | TP $66.75 | SL $62.56
+2026-03-19 [Tessa] [09:41:49] 🟢 Placed LMT1_OPEN for SSRM: Entry $23.4 | TP $24.22 | SL $22.7
+2026-03-19 [Tessa] [09:41:49] 🟢 Placed LMT2_DIP for SSRM: Entry $23.05 | TP $23.86 | SL $22.36
+2026-03-19 [Tessa] [09:41:50] 🟢 Placed LMT1_OPEN for PAAS: Entry $47.0 | TP $48.64 | SL $45.59
+2026-03-19 [Tessa] [09:41:50] 🟢 Placed LMT2_DIP for PAAS: Entry $46.3 | TP $47.92 | SL $44.91
+2026-03-19 [Tessa] [11:30:09] ⏰ 11:30 Failsafe: Cancelled unfilled entry for AA
+2026-03-19 [Tessa] [11:30:09] ⏰ 11:30 Failsafe: Cancelled unfilled entry for PSLV
+2026-03-19 [Tessa] [11:30:11] 🔄 Moving AUGO Stop Loss to Break-Even ($64.92)
+2026-03-19 [Tessa] [11:30:12] 🔄 Moving PAAS Stop Loss to Break-Even ($46.65)
+2026-03-19 [Tessa] [11:30:13] 🔄 Moving AA Stop Loss to Break-Even ($56.64)
+2026-03-19 [Tessa] [15:55:08] ⏰ EOD Liquidation: Flattening PAAS
+2026-03-19 [Tessa] [15:55:09] ⏰ EOD Liquidation: Flattening AA
+2026-03-23 [Tessa] [09:32:25] Config updated.
+2026-03-23 [Tessa] [09:32:25] Autonomous Engine Started.
+2026-03-23 [Tessa] [09:34:12] Config updated.
+2026-03-23 [Tessa] [09:34:43] Config updated.
+2026-03-23 [Tessa] [09:34:44] Autonomous Engine Started.
+2026-03-23 [Tessa] [10:07:51] Config updated.
+2026-03-23 [Tessa] [10:07:51] Autonomous Engine Started.
+2026-03-23 [Tessa] [10:26:18] Config updated.
+2026-03-23 [Tessa] [10:26:19] Autonomous Engine Started.
+2026-03-23 [Tessa] [10:52:35] Config updated.
+2026-03-23 [Tessa] [10:52:35] Autonomous Engine Started.
+2026-03-24 [Tessa] [09:31:12] Config updated.
+2026-03-24 [Tessa] [09:31:12] Autonomous Engine Started.
+2026-03-24 [Tessa] [09:31:13] 📡 Market Scan: Found 1 stocks gapping down worse than -4.5%.
+2026-03-24 [Tessa] [09:31:13] 🔎 Analyzing Risk Profile: EL
+2026-03-24 [Tessa] [09:31:14]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:31:14] 📊 Scan Complete: 0 stocks passed the strict risk filters today.
+2026-03-24 [Tessa] [09:31:57] Config updated.
+2026-03-24 [Tessa] [09:32:28] Config updated.
+2026-03-24 [Tessa] [09:32:28] Autonomous Engine Started.
+2026-03-24 [Tessa] [09:32:28] 📡 Market Scan: Found 5 stocks gapping down worse than -4.5%.
+2026-03-24 [Tessa] [09:32:28] 🔎 Analyzing Risk Profile: IBRX
+2026-03-24 [Tessa] [09:32:29]    ❌ Rejected: Price below $10 ($8.55)
+2026-03-24 [Tessa] [09:32:29] 🔎 Analyzing Risk Profile: EL
+2026-03-24 [Tessa] [09:32:29]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:32:29] 🔎 Analyzing Risk Profile: ALM
+2026-03-24 [Tessa] [09:32:30]    ✅ APPROVED: ALM passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:32:30] 🔎 Analyzing Risk Profile: WSO
+2026-03-24 [Tessa] [09:32:30]    ❌ Rejected: Low Volume (351,550)
+2026-03-24 [Tessa] [09:32:30] 🔎 Analyzing Risk Profile: PATH
+2026-03-24 [Tessa] [09:32:31]    ✅ APPROVED: PATH passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:32:31] Executing trades for top 2 approved targets.
+2026-03-24 [Tessa] [09:32:31] ✅ Approved targets for 2026-03-24: ALM, PATH
+2026-03-24 [Tessa] [09:32:32] 🟢 Placed LMT1_OPEN for ALM: Entry $15.96 | TP $16.52 | SL $15.48
+2026-03-24 [Tessa] [09:32:32] 🟢 Placed LMT2_DIP for ALM: Entry $15.72 | TP $16.27 | SL $15.25
+2026-03-24 [Tessa] [09:32:33] 🟢 Placed LMT1_OPEN for PATH: Entry $11.53 | TP $11.93 | SL $11.18
+2026-03-24 [Tessa] [09:32:34] 🟢 Placed LMT2_DIP for PATH: Entry $11.36 | TP $11.76 | SL $11.02
+2026-03-24 [Tessa] [09:39:38] Config updated.
+2026-03-24 [Tessa] [09:39:38] Autonomous Engine Started.
+2026-03-24 [Tessa] [09:39:38] 📡 Market Scan: Found 42 stocks gapping down worse than -4.5%.
+2026-03-24 [Tessa] [09:39:38] 🔎 Analyzing Risk Profile: IBRX
+2026-03-24 [Tessa] [09:39:39]    ❌ Rejected: Price below $10 ($8.09)
+2026-03-24 [Tessa] [09:39:39] 🔎 Analyzing Risk Profile: TEAM
+2026-03-24 [Tessa] [09:39:39]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:39:39] 🔎 Analyzing Risk Profile: WSO
+2026-03-24 [Tessa] [09:39:39]    ❌ Rejected: Low Volume (351,550)
+2026-03-24 [Tessa] [09:39:39] 🔎 Analyzing Risk Profile: ALM
+2026-03-24 [Tessa] [09:39:40]    ✅ APPROVED: ALM passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:40] 🔎 Analyzing Risk Profile: VRNS
+2026-03-24 [Tessa] [09:39:41]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:39:41] 🔎 Analyzing Risk Profile: PATH
+2026-03-24 [Tessa] [09:39:41]    ✅ APPROVED: PATH passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:41] 🔎 Analyzing Risk Profile: HUBS
+2026-03-24 [Tessa] [09:39:42]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:39:42] 🔎 Analyzing Risk Profile: FUBO
+2026-03-24 [Tessa] [09:39:42]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-24 [Tessa] [09:39:42] 🔎 Analyzing Risk Profile: PAYP
+2026-03-24 [Tessa] [09:39:42]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:39:42] 🔎 Analyzing Risk Profile: EL
+2026-03-24 [Tessa] [09:39:43]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:39:43] 🔎 Analyzing Risk Profile: FICO
+2026-03-24 [Tessa] [09:39:43]    ❌ Rejected: Low Volume (281,250)
+2026-03-24 [Tessa] [09:39:43] 🔎 Analyzing Risk Profile: ETSY
+2026-03-24 [Tessa] [09:39:44]    ✅ APPROVED: ETSY passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:44] 🔎 Analyzing Risk Profile: DG
+2026-03-24 [Tessa] [09:39:44]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-24 [Tessa] [09:39:44] 🔎 Analyzing Risk Profile: CHYM
+2026-03-24 [Tessa] [09:39:45]    ✅ APPROVED: CHYM passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:45] 🔎 Analyzing Risk Profile: MNDY
+2026-03-24 [Tessa] [09:39:46]    ✅ APPROVED: MNDY passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:46] 🔎 Analyzing Risk Profile: TENB
+2026-03-24 [Tessa] [09:39:46]    ✅ APPROVED: TENB passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:46] 🔎 Analyzing Risk Profile: BRZE
+2026-03-24 [Tessa] [09:39:47]    ✅ APPROVED: BRZE passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:47] 🔎 Analyzing Risk Profile: WING
+2026-03-24 [Tessa] [09:39:47]    ✅ APPROVED: WING passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:47] 🔎 Analyzing Risk Profile: KVYO
+2026-03-24 [Tessa] [09:39:48]    ✅ APPROVED: KVYO passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:48] 🔎 Analyzing Risk Profile: RBRK
+2026-03-24 [Tessa] [09:39:48]    ✅ APPROVED: RBRK passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:48] 🔎 Analyzing Risk Profile: IT
+2026-03-24 [Tessa] [09:39:49]    ✅ APPROVED: IT passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:49] 🔎 Analyzing Risk Profile: WDAY
+2026-03-24 [Tessa] [09:39:49]    ✅ APPROVED: WDAY passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:49] 🔎 Analyzing Risk Profile: NICE
+2026-03-24 [Tessa] [09:39:50]    ✅ APPROVED: NICE passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:50] 🔎 Analyzing Risk Profile: PCOR
+2026-03-24 [Tessa] [09:39:50]    ✅ APPROVED: PCOR passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:50] 🔎 Analyzing Risk Profile: BILL
+2026-03-24 [Tessa] [09:39:51]    ✅ APPROVED: BILL passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:51] 🔎 Analyzing Risk Profile: PEGA
+2026-03-24 [Tessa] [09:39:51]    ✅ APPROVED: PEGA passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:51] 🔎 Analyzing Risk Profile: ZS
+2026-03-24 [Tessa] [09:39:52]    ✅ APPROVED: ZS passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:52] 🔎 Analyzing Risk Profile: GTLB
+2026-03-24 [Tessa] [09:39:52]    ✅ APPROVED: GTLB passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:52] 🔎 Analyzing Risk Profile: COMP
+2026-03-24 [Tessa] [09:39:53]    ❌ Rejected: Price below $10 ($8.07)
+2026-03-24 [Tessa] [09:39:53] 🔎 Analyzing Risk Profile: FIG
+2026-03-24 [Tessa] [09:39:53]    ✅ APPROVED: FIG passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:53] 🔎 Analyzing Risk Profile: GWRE
+2026-03-24 [Tessa] [09:39:54]    ✅ APPROVED: GWRE passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:54] 🔎 Analyzing Risk Profile: ESTC
+2026-03-24 [Tessa] [09:39:54]    ✅ APPROVED: ESTC passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:54] 🔎 Analyzing Risk Profile: MDB
+2026-03-24 [Tessa] [09:39:55]    ✅ APPROVED: MDB passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:55] 🔎 Analyzing Risk Profile: INTU
+2026-03-24 [Tessa] [09:39:55]    ✅ APPROVED: INTU passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:55] 🔎 Analyzing Risk Profile: RNG
+2026-03-24 [Tessa] [09:39:56]    ✅ APPROVED: RNG passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:56] 🔎 Analyzing Risk Profile: DLTR
+2026-03-24 [Tessa] [09:39:56]    ✅ APPROVED: DLTR passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:56] 🔎 Analyzing Risk Profile: NOW
+2026-03-24 [Tessa] [09:39:57]    ✅ APPROVED: NOW passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:57] 🔎 Analyzing Risk Profile: S
+2026-03-24 [Tessa] [09:39:57]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-24 [Tessa] [09:39:57] 🔎 Analyzing Risk Profile: CSGP
+2026-03-24 [Tessa] [09:39:57]    ✅ APPROVED: CSGP passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:57] 🔎 Analyzing Risk Profile: DXC
+2026-03-24 [Tessa] [09:39:58]    ✅ APPROVED: DXC passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:58] 🔎 Analyzing Risk Profile: SAIL
+2026-03-24 [Tessa] [09:39:58]    ✅ APPROVED: SAIL passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:58] 🔎 Analyzing Risk Profile: DDOG
+2026-03-24 [Tessa] [09:39:59]    ✅ APPROVED: DDOG passed strict LOW RISK filters.
+2026-03-24 [Tessa] [09:39:59] Executing trades for top 10 approved targets.
+2026-03-24 [Tessa] [09:39:59] ✅ Approved targets for 2026-03-24: ALM, PATH, BRZE, KVYO, ETSY, CHYM, MNDY, WING, RBRK, TENB
+2026-03-24 [Tessa] [09:39:59] 🟢 Placed LMT1_OPEN for ALM: Entry $15.28 | TP $15.81 | SL $14.82
+2026-03-24 [Tessa] [09:40:00] 🟢 Placed LMT2_DIP for ALM: Entry $15.05 | TP $15.58 | SL $14.6
+2026-03-24 [Tessa] [09:40:01] 🟢 Placed LMT1_OPEN for PATH: Entry $11.15 | TP $11.54 | SL $10.82
+2026-03-24 [Tessa] [09:40:01] 🟢 Placed LMT2_DIP for PATH: Entry $10.99 | TP $11.37 | SL $10.66
+2026-03-24 [Tessa] [09:40:02] 🟢 Placed LMT1_OPEN for BRZE: Entry $17.77 | TP $18.39 | SL $17.24
+2026-03-24 [Tessa] [09:40:02] 🟢 Placed LMT2_DIP for BRZE: Entry $17.5 | TP $18.11 | SL $16.97
+2026-03-24 [Tessa] [09:40:03] 🟢 Placed LMT1_OPEN for KVYO: Entry $17.84 | TP $18.46 | SL $17.3
+2026-03-24 [Tessa] [09:40:04] 🟢 Placed LMT2_DIP for KVYO: Entry $17.58 | TP $18.2 | SL $17.05
+2026-03-24 [Tessa] [09:40:05] 🟢 Placed LMT1_OPEN for ETSY: Entry $49.42 | TP $51.15 | SL $47.94
+2026-03-24 [Tessa] [09:40:05] 🟢 Placed LMT2_DIP for ETSY: Entry $48.68 | TP $50.38 | SL $47.22
+2026-03-24 [Tessa] [09:40:06] 🟢 Placed LMT1_OPEN for CHYM: Entry $18.62 | TP $19.27 | SL $18.06
+2026-03-24 [Tessa] [09:40:06] 🟢 Placed LMT2_DIP for CHYM: Entry $18.34 | TP $18.98 | SL $17.79
+2026-03-24 [Tessa] [09:40:07] 🟢 Placed LMT1_OPEN for MNDY: Entry $71.11 | TP $73.6 | SL $68.98
+2026-03-24 [Tessa] [09:40:08] 🟢 Placed LMT2_DIP for MNDY: Entry $70.04 | TP $72.49 | SL $67.94
+2026-03-24 [Tessa] [09:40:08] 🟢 Placed LMT1_OPEN for WING: Entry $172.97 | TP $179.02 | SL $167.78
+2026-03-24 [Tessa] [09:40:09] 🟢 Placed LMT2_DIP for WING: Entry $170.38 | TP $176.34 | SL $165.27
+2026-03-24 [Tessa] [09:40:10] 🟢 Placed LMT1_OPEN for RBRK: Entry $48.33 | TP $50.02 | SL $46.88
+2026-03-24 [Tessa] [09:40:10] 🟢 Placed LMT2_DIP for RBRK: Entry $47.61 | TP $49.28 | SL $46.18
+2026-03-24 [Tessa] [09:40:11] 🟢 Placed LMT1_OPEN for TENB: Entry $19.15 | TP $19.82 | SL $18.58
+2026-03-24 [Tessa] [09:40:11] 🟢 Placed LMT2_DIP for TENB: Entry $18.86 | TP $19.52 | SL $18.29
+2026-03-24 [Tessa] [11:30:00] 🔄 Moving ALM Stop Loss to Break-Even ($15.30)
+2026-03-24 [Tessa] [11:30:01] 🔄 Moving PATH Stop Loss to Break-Even ($11.14)
+2026-03-24 [Tessa] [11:30:02] 🔄 Moving WING Stop Loss to Break-Even ($171.58)
+2026-03-24 [Tessa] [11:30:03] 🔄 Moving MNDY Stop Loss to Break-Even ($71.11)
+2026-03-24 [Tessa] [11:30:04] 🔄 Moving CHYM Stop Loss to Break-Even ($18.47)
+2026-03-24 [Tessa] [11:30:05] 🔄 Moving ETSY Stop Loss to Break-Even ($49.05)
+2026-03-24 [Tessa] [11:30:06] 🔄 Moving BRZE Stop Loss to Break-Even ($17.77)
+2026-03-24 [Tessa] [11:30:07] 🔄 Moving RBRK Stop Loss to Break-Even ($48.34)
+2026-03-24 [Tessa] [11:30:08] 🔄 Moving TENB Stop Loss to Break-Even ($19.15)
+2026-03-24 [Tessa] [15:55:03] ⏰ EOD Liquidation: Flattening MNDY
+2026-03-24 [Tessa] [15:55:04] ⏰ EOD Liquidation: Flattening BRZE
+2026-03-24 [Tessa] [15:55:05] ⏰ EOD Liquidation: Flattening ALM
+2026-03-24 [Tessa] [22:57:02] Config updated.
+2026-03-24 [Tessa] [22:57:02] Autonomous Engine Started.
+2026-03-25 [Tessa] [09:32:41] Config updated.
+2026-03-25 [Tessa] [09:32:41] Autonomous Engine Started.
+2026-03-25 [Tessa] [09:32:42] 📡 Market Scan: Found 9 stocks gapping down worse than -4.5%.
+2026-03-25 [Tessa] [09:32:42] 🔎 Analyzing Risk Profile: FPS
+2026-03-25 [Tessa] [09:32:43]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-25 [Tessa] [09:32:43] 🔎 Analyzing Risk Profile: ONON
+2026-03-25 [Tessa] [09:32:44]    ✅ APPROVED: ONON passed strict LOW RISK filters.
+2026-03-25 [Tessa] [09:32:44] 🔎 Analyzing Risk Profile: SNDK
+2026-03-25 [Tessa] [09:32:44]    ✅ APPROVED: SNDK passed strict LOW RISK filters.
+2026-03-25 [Tessa] [09:32:44] 🔎 Analyzing Risk Profile: LBRT
+2026-03-25 [Tessa] [09:32:45]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-25 [Tessa] [09:32:45] 🔎 Analyzing Risk Profile: DOCN
+2026-03-25 [Tessa] [09:32:46]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-25 [Tessa] [09:32:46] 🔎 Analyzing Risk Profile: WDC
+2026-03-25 [Tessa] [09:32:46]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-25 [Tessa] [09:32:46] 🔎 Analyzing Risk Profile: ADMA
+2026-03-25 [Tessa] [09:32:47]    ✅ APPROVED: ADMA passed strict LOW RISK filters.
+2026-03-25 [Tessa] [09:32:47] 🔎 Analyzing Risk Profile: MU
+2026-03-25 [Tessa] [09:32:47]    ✅ APPROVED: MU passed strict LOW RISK filters.
+2026-03-25 [Tessa] [09:32:47] 🔎 Analyzing Risk Profile: STX
+2026-03-25 [Tessa] [09:32:48]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-25 [Tessa] [09:32:48] Executing trades for top 4 approved targets.
+2026-03-25 [Tessa] [09:32:48] ✅ Approved targets for 2026-03-25: ONON, SNDK, MU, ADMA
+2026-03-25 [Tessa] [09:32:48] 🛡️ PILOT MODE ACTIVE: Reducing ONON orders to 1 share.
+2026-03-25 [Tessa] [09:32:49] 🟢 Placed LMT1_OPEN for ONON: Entry $36.09 | TP $37.35 | SL $35.01
+2026-03-25 [Tessa] [09:32:49] 🟢 Placed LMT2_DIP for ONON: Entry $35.55 | TP $36.79 | SL $34.48
+2026-03-25 [Tessa] [09:32:49] 🛡️ PILOT MODE ACTIVE: Reducing SNDK orders to 1 share.
+2026-03-25 [Tessa] [09:32:50] 🟢 Placed LMT1_OPEN for SNDK: Entry $649.52 | TP $672.25 | SL $630.03
+2026-03-25 [Tessa] [09:32:50] 🟢 Placed LMT2_DIP for SNDK: Entry $639.78 | TP $662.17 | SL $620.59
+2026-03-25 [Tessa] [09:32:51] 🛡️ PILOT MODE ACTIVE: Reducing MU orders to 1 share.
+2026-03-25 [Tessa] [09:32:51] 🟢 Placed LMT1_OPEN for MU: Entry $374.11 | TP $387.2 | SL $362.89
+2026-03-25 [Tessa] [09:32:52] 🟢 Placed LMT2_DIP for MU: Entry $368.49 | TP $381.39 | SL $357.44
+2026-03-25 [Tessa] [09:32:52] 🛡️ PILOT MODE ACTIVE: Reducing ADMA orders to 1 share.
+2026-03-25 [Tessa] [09:32:52] 🟢 Placed LMT1_OPEN for ADMA: Entry $10.75 | TP $11.13 | SL $10.43
+2026-03-25 [Tessa] [09:32:53] 🟢 Placed LMT2_DIP for ADMA: Entry $10.59 | TP $10.96 | SL $10.27
+2026-03-25 [Tessa] [11:30:12] 🔄 Moving ONON Stop Loss to Break-Even ($36.45)
+2026-03-26 [Tessa] [09:34:15] Config updated.
+2026-03-26 [Tessa] [09:34:16] Autonomous Engine Started.
+2026-03-26 [Tessa] [09:34:16] 📡 Market Scan: Found 17 stocks gapping down worse than -4.5%.
+2026-03-26 [Tessa] [09:34:16] 🔎 Analyzing Risk Profile: PONY
+2026-03-26 [Tessa] [09:34:17]    ✅ APPROVED: PONY passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:17] 🔎 Analyzing Risk Profile: APP
+2026-03-26 [Tessa] [09:34:18]    ✅ APPROVED: APP passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:18] 🔎 Analyzing Risk Profile: ALM
+2026-03-26 [Tessa] [09:34:19]    ✅ APPROVED: ALM passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:19] 🔎 Analyzing Risk Profile: CORT
+2026-03-26 [Tessa] [09:34:19]    ✅ APPROVED: CORT passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:19] 🔎 Analyzing Risk Profile: SMG
+2026-03-26 [Tessa] [09:34:20]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-26 [Tessa] [09:34:20] 🔎 Analyzing Risk Profile: SCCO
+2026-03-26 [Tessa] [09:34:21]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-26 [Tessa] [09:34:21] 🔎 Analyzing Risk Profile: APLD
+2026-03-26 [Tessa] [09:34:21]    ✅ APPROVED: APLD passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:21] 🔎 Analyzing Risk Profile: AAOI
+2026-03-26 [Tessa] [09:34:22]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-26 [Tessa] [09:34:22] 🔎 Analyzing Risk Profile: PSLV
+2026-03-26 [Tessa] [09:34:22]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-26 [Tessa] [09:34:22] 🔎 Analyzing Risk Profile: FUBO
+2026-03-26 [Tessa] [09:34:22]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-26 [Tessa] [09:34:22] 🔎 Analyzing Risk Profile: WULF
+2026-03-26 [Tessa] [09:34:23]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-26 [Tessa] [09:34:23] 🔎 Analyzing Risk Profile: ARWR
+2026-03-26 [Tessa] [09:34:26]    ✅ APPROVED: ARWR passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:26] 🔎 Analyzing Risk Profile: AMKR
+2026-03-26 [Tessa] [09:34:26]    ✅ APPROVED: AMKR passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:26] 🔎 Analyzing Risk Profile: XPEV
+2026-03-26 [Tessa] [09:34:27]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-26 [Tessa] [09:34:27] 🔎 Analyzing Risk Profile: TTMI
+2026-03-26 [Tessa] [09:34:28]    ✅ APPROVED: TTMI passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:28] 🔎 Analyzing Risk Profile: VICR
+2026-03-26 [Tessa] [09:34:28]    ✅ APPROVED: VICR passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:28] 🔎 Analyzing Risk Profile: CIFR
+2026-03-26 [Tessa] [09:34:29]    ✅ APPROVED: CIFR passed strict LOW RISK filters.
+2026-03-26 [Tessa] [09:34:29] Executing trades for top 10 approved targets.
+2026-03-26 [Tessa] [09:34:29] ✅ Approved targets for 2026-03-26: APP, PONY, ALM, CORT, VICR, APLD, AMKR, ARWR, TTMI, CIFR
+2026-03-26 [Tessa] [09:34:29] 🟢 Placed LMT1_OPEN for APP: Entry $402.75 | TP $416.85 | SL $390.67
+2026-03-26 [Tessa] [09:34:30] 🟢 Placed LMT2_DIP for APP: Entry $390.67 | TP $404.34 | SL $378.95
+2026-03-26 [Tessa] [09:34:31] 🟢 Placed LMT1_OPEN for PONY: Entry $10.6 | TP $10.97 | SL $10.28
+2026-03-26 [Tessa] [09:34:32] 🟢 Placed LMT2_DIP for PONY: Entry $10.28 | TP $10.64 | SL $9.97
+2026-03-26 [Tessa] [09:34:32] 🟢 Placed LMT1_OPEN for ALM: Entry $15.22 | TP $15.75 | SL $14.76
+2026-03-26 [Tessa] [09:34:33] 🟢 Placed LMT2_DIP for ALM: Entry $14.76 | TP $15.28 | SL $14.32
+2026-03-26 [Tessa] [09:34:34] 🟢 Placed LMT1_OPEN for CORT: Entry $38.26 | TP $39.6 | SL $37.11
+2026-03-26 [Tessa] [09:34:34] 🟢 Placed LMT2_DIP for CORT: Entry $37.11 | TP $38.41 | SL $36.0
+2026-03-26 [Tessa] [09:34:35] 🟢 Placed LMT1_OPEN for VICR: Entry $176.36 | TP $182.53 | SL $171.07
+2026-03-26 [Tessa] [09:34:35] 🟢 Placed LMT2_DIP for VICR: Entry $171.07 | TP $177.06 | SL $165.94
+2026-03-26 [Tessa] [09:34:36] 🟢 Placed LMT1_OPEN for APLD: Entry $26.97 | TP $27.91 | SL $26.16
+2026-03-26 [Tessa] [09:34:37] 🟢 Placed LMT2_DIP for APLD: Entry $26.16 | TP $27.08 | SL $25.38
+2026-03-26 [Tessa] [09:34:37] 🟢 Placed LMT1_OPEN for AMKR: Entry $47.59 | TP $49.26 | SL $46.16
+2026-03-26 [Tessa] [09:34:38] 🟢 Placed LMT2_DIP for AMKR: Entry $46.17 | TP $47.79 | SL $44.78
+2026-03-26 [Tessa] [09:34:39] 🟢 Placed LMT1_OPEN for ARWR: Entry $57.99 | TP $60.02 | SL $56.25
+2026-03-26 [Tessa] [09:34:39] 🟢 Placed LMT2_DIP for ARWR: Entry $56.25 | TP $58.22 | SL $54.56
+2026-03-26 [Tessa] [09:34:40] 🟢 Placed LMT1_OPEN for TTMI: Entry $103.08 | TP $106.69 | SL $99.99
+2026-03-26 [Tessa] [09:34:40] 🟢 Placed LMT2_DIP for TTMI: Entry $99.99 | TP $103.49 | SL $96.99
+2026-03-26 [Tessa] [09:34:41] 🟢 Placed LMT1_OPEN for CIFR: Entry $15.16 | TP $15.69 | SL $14.71
+2026-03-26 [Tessa] [09:34:42] 🟢 Placed LMT2_DIP for CIFR: Entry $14.71 | TP $15.22 | SL $14.27
+2026-03-26 [Tessa] [11:30:01] 📉 APP is at a loss ($-501.34). Liquidating at 11:30 AM failsafe.
+2026-03-26 [Tessa] [11:30:02] 📉 ALM is at a loss ($-1001.67). Liquidating at 11:30 AM failsafe.
+2026-03-26 [Tessa] [11:30:03] 📉 APLD is at a loss ($-638.47). Liquidating at 11:30 AM failsafe.
+2026-03-26 [Tessa] [11:30:04] 📉 CIFR is at a loss ($-575.76). Liquidating at 11:30 AM failsafe.
+2026-03-26 [Tessa] [11:30:05] 📉 TTMI is at a loss ($-259.45). Liquidating at 11:30 AM failsafe.
+2026-03-26 [Tessa] [11:30:06] 📉 AMKR is at a loss ($-338.62). Liquidating at 11:30 AM failsafe.
+2026-03-26 [Tessa] [11:30:07] 🔄 Moving CORT Stop Loss to Break-Even ($38.27)
+2026-03-30 [Tessa] [09:33:15] Config updated.
+2026-03-30 [Tessa] [09:33:16] Autonomous Engine Started.
+2026-03-30 [Tessa] [09:33:16] 📡 Market Scan: Found 7 stocks gapping down worse than -4.5%.
+2026-03-30 [Tessa] [09:33:16] 🔎 Analyzing Risk Profile: SYY
+2026-03-30 [Tessa] [09:33:17]    ✅ APPROVED: SYY passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:33:17] 🔎 Analyzing Risk Profile: ALMS
+2026-03-30 [Tessa] [09:33:17]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-30 [Tessa] [09:33:17] 🔎 Analyzing Risk Profile: NXST
+2026-03-30 [Tessa] [09:33:18]    ❌ Rejected: Low Volume (301,600)
+2026-03-30 [Tessa] [09:33:18] 🔎 Analyzing Risk Profile: ALK
+2026-03-30 [Tessa] [09:33:18]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:33:18] 🔎 Analyzing Risk Profile: BSX
+2026-03-30 [Tessa] [09:33:19]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:33:19] 🔎 Analyzing Risk Profile: KEP
+2026-03-30 [Tessa] [09:33:20]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-30 [Tessa] [09:33:20] 🔎 Analyzing Risk Profile: ATS
+2026-03-30 [Tessa] [09:33:20]    ❌ Rejected: Low Volume (156,350)
+2026-03-30 [Tessa] [09:33:20] Executing trades for top 1 approved targets.
+2026-03-30 [Tessa] [09:33:20] ✅ Approved targets for 2026-03-30: SYY
+2026-03-30 [Tessa] [09:33:20] 🟢 Placed LMT1_OPEN for SYY: Entry $73.26 | TP $75.82 | SL $71.06
+2026-03-30 [Tessa] [09:33:21] 🟢 Placed LMT2_DIP for SYY: Entry $72.16 | TP $74.69 | SL $70.0
+2026-03-30 [Tessa] [09:41:12] Config updated.
+2026-03-30 [Tessa] [09:42:14] Config updated.
+2026-03-30 [Tessa] [09:42:15] Autonomous Engine Started.
+2026-03-30 [Tessa] [09:42:15] 📡 Market Scan: Found 23 stocks gapping down worse than -4.5%.
+2026-03-30 [Tessa] [09:42:15] 🔎 Analyzing Risk Profile: SYY
+2026-03-30 [Tessa] [09:42:16]    ✅ APPROVED: SYY passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:16] 🔎 Analyzing Risk Profile: AAOI
+2026-03-30 [Tessa] [09:42:17]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:42:17] 🔎 Analyzing Risk Profile: LASR
+2026-03-30 [Tessa] [09:42:18]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:42:18] 🔎 Analyzing Risk Profile: ALMS
+2026-03-30 [Tessa] [09:42:18]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-30 [Tessa] [09:42:18] 🔎 Analyzing Risk Profile: NXST
+2026-03-30 [Tessa] [09:42:18]    ❌ Rejected: Low Volume (301,600)
+2026-03-30 [Tessa] [09:42:18] 🔎 Analyzing Risk Profile: KEP
+2026-03-30 [Tessa] [09:42:18]    ❌ Rejected: Weak Earnings History (<=1 Beat)
+2026-03-30 [Tessa] [09:42:18] 🔎 Analyzing Risk Profile: MOD
+2026-03-30 [Tessa] [09:42:19]    ✅ APPROVED: MOD passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:19] 🔎 Analyzing Risk Profile: VIAV
+2026-03-30 [Tessa] [09:42:19]    ✅ APPROVED: VIAV passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:19] 🔎 Analyzing Risk Profile: TSEM
+2026-03-30 [Tessa] [09:42:20]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:42:20] 🔎 Analyzing Risk Profile: BE
+2026-03-30 [Tessa] [09:42:21]    ✅ APPROVED: BE passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:21] 🔎 Analyzing Risk Profile: BSX
+2026-03-30 [Tessa] [09:42:21]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:42:21] 🔎 Analyzing Risk Profile: ALK
+2026-03-30 [Tessa] [09:42:22]    ❌ Rejected: Dangerous Dilution/Negative News Detected.
+2026-03-30 [Tessa] [09:42:22] 🔎 Analyzing Risk Profile: LGN
+2026-03-30 [Tessa] [09:42:22]    ❌ Rejected: Accumulated 2 mediocre (yellow) metrics.
+2026-03-30 [Tessa] [09:42:22] 🔎 Analyzing Risk Profile: VICR
+2026-03-30 [Tessa] [09:42:23]    ✅ APPROVED: VICR passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:23] 🔎 Analyzing Risk Profile: FN
+2026-03-30 [Tessa] [09:42:24]    ✅ APPROVED: FN passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:24] 🔎 Analyzing Risk Profile: IBRX
+2026-03-30 [Tessa] [09:42:24]    ❌ Rejected: Price below $10 ($6.98)
+2026-03-30 [Tessa] [09:42:24] 🔎 Analyzing Risk Profile: MDA
+2026-03-30 [Tessa] [09:42:24]    ✅ APPROVED: MDA passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:24] 🔎 Analyzing Risk Profile: CIEN
+2026-03-30 [Tessa] [09:42:25]    ✅ APPROVED: CIEN passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:25] 🔎 Analyzing Risk Profile: TTMI
+2026-03-30 [Tessa] [09:42:25]    ✅ APPROVED: TTMI passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:25] 🔎 Analyzing Risk Profile: INFQ
+2026-03-30 [Tessa] [09:42:25]    ❌ Rejected: Price below $10 ($9.36)
+2026-03-30 [Tessa] [09:42:25] 🔎 Analyzing Risk Profile: MTSI
+2026-03-30 [Tessa] [09:42:26]    ✅ APPROVED: MTSI passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:26] 🔎 Analyzing Risk Profile: PRIM
+2026-03-30 [Tessa] [09:42:26]    ✅ APPROVED: PRIM passed strict LOW RISK filters.
+2026-03-30 [Tessa] [09:42:26] 🔎 Analyzing Risk Profile: STRL
+2026-03-30 [Tessa] [09:42:26]    ❌ Rejected: Low Volume (459,400)
+2026-03-30 [Tessa] [09:42:26] Executing trades for top 10 approved targets.
+2026-03-30 [Tessa] [09:42:26] ✅ Approved targets for 2026-03-30: SYY, BE, MOD, VIAV, MDA, TTMI, PRIM, FN, CIEN, MTSI
+2026-03-30 [Tessa] [09:42:59] 🟢 Placed LMT1_OPEN for SYY: Entry $70.77 | TP $73.25 | SL $68.65
+2026-03-30 [Tessa] [09:42:59] 🟢 Placed LMT2_DIP for SYY: Entry $69.7 | TP $72.14 | SL $67.61
+2026-03-30 [Tessa] [09:43:00] 🟢 Placed LMT1_OPEN for BE: Entry $124.81 | TP $129.18 | SL $121.07
+2026-03-30 [Tessa] [09:43:01] 🟢 Placed LMT2_DIP for BE: Entry $122.94 | TP $127.24 | SL $119.25
+2026-03-30 [Tessa] [09:43:02] 🟢 Placed LMT1_OPEN for MOD: Entry $200.81 | TP $207.84 | SL $194.79
+2026-03-30 [Tessa] [09:43:02] 🟢 Placed LMT2_DIP for MOD: Entry $197.8 | TP $204.72 | SL $191.87
+2026-03-30 [Tessa] [09:43:03] 🟢 Placed LMT1_OPEN for VIAV: Entry $32.66 | TP $33.8 | SL $31.68
+2026-03-30 [Tessa] [09:43:03] 🟢 Placed LMT2_DIP for VIAV: Entry $32.17 | TP $33.3 | SL $31.2
+2026-03-30 [Tessa] [09:43:04] 🟢 Placed LMT1_OPEN for MDA: Entry $23.56 | TP $24.38 | SL $22.85
+2026-03-30 [Tessa] [09:43:05] 🟢 Placed LMT2_DIP for MDA: Entry $23.21 | TP $24.02 | SL $22.51
+2026-03-30 [Tessa] [09:43:06] 🟢 Placed LMT1_OPEN for TTMI: Entry $90.61 | TP $93.78 | SL $87.89
+2026-03-30 [Tessa] [09:43:06] 🟢 Placed LMT2_DIP for TTMI: Entry $89.25 | TP $92.37 | SL $86.57
+2026-03-30 [Tessa] [09:43:07] 🟢 Placed LMT1_OPEN for PRIM: Entry $136.17 | TP $140.94 | SL $132.08
+2026-03-30 [Tessa] [09:43:07] 🟢 Placed LMT2_DIP for PRIM: Entry $134.13 | TP $138.82 | SL $130.11
+2026-03-30 [Tessa] [09:43:08] 🟢 Placed LMT1_OPEN for FN: Entry $525.38 | TP $543.77 | SL $509.62
+2026-03-30 [Tessa] [09:43:09] 🟢 Placed LMT2_DIP for FN: Entry $517.5 | TP $535.61 | SL $501.97
+2026-03-30 [Tessa] [09:43:09] 🟢 Placed LMT1_OPEN for CIEN: Entry $382.4 | TP $395.78 | SL $370.93
+2026-03-30 [Tessa] [09:43:10] 🟢 Placed LMT2_DIP for CIEN: Entry $376.66 | TP $389.84 | SL $365.36
+2026-03-30 [Tessa] [09:43:11] 🟢 Placed LMT1_OPEN for MTSI: Entry $214.71 | TP $222.22 | SL $208.27
+2026-03-30 [Tessa] [09:43:11] 🟢 Placed LMT2_DIP for MTSI: Entry $211.49 | TP $218.89 | SL $205.15

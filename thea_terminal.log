@@ -1,0 +1,37 @@
+2026-03-23 [Thea] [09:06:15] [Thea] Config updated. Tickers: 0
+2026-03-23 [Thea] [09:51:53] Engine Started.
+2026-03-23 [Thea] [09:52:33] [Thea] Config updated. Tickers: 19
+2026-03-23 [Thea] [09:52:43] Engine Started.
+2026-03-23 [Thea] [09:58:28] [Thea] Config updated. Tickers: 19
+2026-03-23 [Thea] [09:58:32] Engine Started.
+2026-03-23 [Thea] [09:58:47] Found 8 valid signals. Executing...
+2026-03-23 [Thea] [09:58:48] ✅ Placed DIS Bracket. Entry: 99.51, TP: 101.0, SL: 98.51
+2026-03-23 [Thea] [09:58:50] ✅ Placed MSFT Bracket. Entry: 381.87, TP: 387.6, SL: 378.05
+2026-03-23 [Thea] [09:58:52] ✅ Placed COIN Bracket. Entry: 197.5, TP: 200.46, SL: 195.53
+2026-03-23 [Thea] [09:58:54] ✅ Placed MDT Bracket. Entry: 86.16, TP: 87.45, SL: 85.3
+2026-03-23 [Thea] [09:58:56] ✅ Placed MDLZ Bracket. Entry: 56.21, TP: 57.05, SL: 55.65
+2026-03-23 [Thea] [09:58:58] ✅ Placed KO Bracket. Entry: 74.75, TP: 75.87, SL: 74.0
+2026-03-23 [Thea] [09:59:00] ✅ Placed JNJ Bracket. Entry: 235.37, TP: 238.9, SL: 233.02
+2026-03-23 [Thea] [09:59:02] ✅ Placed V Bracket. Entry: 301.62, TP: 306.14, SL: 298.6
+2026-03-24 [Thea] [09:28:26] [Thea] Config updated. Tickers: 0
+2026-03-24 [Thea] [09:47:35] Engine Started.
+2026-03-24 [Thea] [09:47:35] 📊 Scan Complete: No valid gap signals found in 0 tickers
+2026-03-24 [Thea] [22:55:43] [Thea] Config updated. Tickers: 0
+2026-03-24 [Thea] [22:56:58] Engine Started.
+2026-03-25 [Thea] [07:36:07] Engine Started.
+2026-03-25 [Thea] [07:36:12] [Thea] Config updated. Tickers: 0
+2026-03-25 [Thea] [07:36:26] Engine Started.
+2026-03-25 [Thea] [10:59:54] Engine Started.
+2026-03-25 [Thea] [10:59:54] 📊 Scan Complete: No valid gap signals found in 0 tickers
+2026-03-26 [Thea] [09:37:29] [Thea] Config updated. Tickers: 0
+2026-03-26 [Thea] [09:56:31] Engine Started.
+2026-03-26 [Thea] [09:56:31] 📊 Scan Complete: No valid gap signals found in 0 tickers
+2026-03-26 [Thea] [09:56:46] 🛑 Engine Stopped. Disconnected from IBKR successfully.
+2026-03-30 [Thea] [09:44:49] [Thea] Config updated. Tickers: 0
+2026-03-30 [Thea] [09:47:13] Engine Started.
+2026-03-30 [Thea] [09:47:13] 📊 Scan Complete: No valid gap signals found in 0 tickers
+2026-03-30 [Thea] [09:47:34] Engine Started.
+2026-03-30 [Thea] [09:47:38] Error during scan: 
+2026-03-30 [Thea] [09:47:47] Error during scan: 
+2026-03-30 [Thea] [09:48:25] Engine Started.
+2026-03-30 [Thea] [09:48:25] 📊 Scan Complete: No valid gap signals found in 0 tickers

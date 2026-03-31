@@ -22,6 +22,9 @@ import numpy as np
 import yfinance as yf
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+import os
+import sys
+
 
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,6 +32,58 @@ from pydantic import BaseModel
 from typing import List, Optional
 from ib_insync import *
 from zoneinfo import ZoneInfo
+
+import jwt
+import requests
+from fastapi import Depends, HTTPException, Security
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+# --- AUTH0 SECURITY SETUP ---
+AUTH0_DOMAIN = "dev-q3zq2aoinxvy085j.us.auth0.com"
+API_AUDIENCE = "https://api.sevendimensions.com"
+ALGORITHMS = ["RS256"]
+security = HTTPBearer()
+
+
+def verify_token(credentials: HTTPAuthorizationCredentials = Security(security)):
+    """Validates the JWT token against Auth0's public keys."""
+    token = credentials.credentials
+    try:
+        # Fetch Auth0 Public Keys
+        jwks_url = f'https://{AUTH0_DOMAIN}/.well-known/jwks.json'
+        jwks = requests.get(jwks_url).json()
+        unverified_header = jwt.get_unverified_header(token)
+
+        rsa_key = {}
+        for key in jwks["keys"]:
+            if key["kid"] == unverified_header["kid"]:
+                rsa_key = {
+                    "kty": key["kty"],
+                    "kid": key["kid"],
+                    "use": key["use"],
+                    "n": key["n"],
+                    "e": key["e"]
+                }
+                break
+
+        if rsa_key:
+            # Decode and validate the token
+            payload = jwt.decode(
+                token,
+                jwt.algorithms.RSAAlgorithm.from_jwk(rsa_key),
+                algorithms=ALGORITHMS,
+                audience=API_AUDIENCE,
+                issuer=f"https://{AUTH0_DOMAIN}/"
+            )
+            return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.JWTClaimsError:
+        raise HTTPException(status_code=401, detail="Invalid claims (check audience/issuer)")
+    except Exception as e:
+        raise HTTPException(status_code=401, detail="Unable to parse authentication token.")
+
+    raise HTTPException(status_code=401, detail="Invalid token.")
 
 ET = ZoneInfo("America/New_York")
 
@@ -72,34 +127,95 @@ class TheaConfig(BaseModel):
     max_order_value_usd: float = float(os.getenv('MAX_ORDER_VALUE', 250000))
 
 class TessaConfig(BaseModel):
-    ticker: str = "BFH"
-    trade_amount_usd: float = 50000
-    limit_1_price: float = 70
-    limit_2_price: float = 68
-    tp_pct: float = 3.5
-    initial_trail_pct: float = 1.8
-    final_trail_pct: float = 1.8
-    delay_sec: int = 5400
-    telegram_bot_token: Optional[str] = ""
-    telegram_chat_id: Optional[str] = ""
-    ibkr_host: str = "127.0.0.1"
-    ibkr_port: int = 7497
-    ibkr_client_id: int = 2  # Unified Client ID
-    # --- ADD AUDIT & COMPLIANCE CONTROLS ---
-    max_shares_per_order: int = int(os.getenv('MAX_SHARES_PER_ORDER', 5000))  # Fat-finger limit
-    max_order_value_usd: float = float(os.getenv('MAX_ORDER_VALUE', 250000))  # Fat-finger dollar limit
-    max_daily_drawdown_usd: float = float(os.getenv('MAX_DAILY_DRAWDOWN', -25000))  # Circuit breaker
-    pilot_mode: bool = os.getenv('PILOT_MODE', 'True').lower() == 'true'  # Deployment control
+    ibkr_host: str = os.getenv('IBKR_HOST', '127.0.0.1')
+    ibkr_port: int = int(os.getenv('IBKR_PORT', 7497))
+    ibkr_client_id: int = 2
+    scanner_gap_down_threshold: float = float(os.getenv('SCANNER_GAP_DOWN_THRESHOLD', -4.5))
+    allocation_per_order: float = float(os.getenv('ALLOCATION_PER_ORDER', 25000))
+    entry_2_offset_pct: float = float(os.getenv('ENTRY_2_OFFSET_PCT', 0.985))
+    tessa_take_profit_pct: float = float(os.getenv('TESSA_TAKE_PROFIT_PCT', 1.035))
+    tessa_stop_loss_pct: float = float(os.getenv('TESSA_STOP_LOSS_PCT', 0.97))
+    min_avg_volume: int = int(os.getenv('MIN_AVG_VOLUME', 500000))
+    min_volatility_pct: float = float(os.getenv('MIN_VOLATILITY_PCT', 1.5))
+    pilot_mode: bool = True
+    max_trades: int = int(os.getenv('TESSA_MAX_TRADES', 10))
 
 
 # --- RISK MGMT GLOBALS ---
 state_risk_logs = []
-BAD_NEWS_KEYWORDS = ['lawsuit', 'fraud', 'investigation', 'subpoena', 'bankruptcy', 'insolvency', 'misses', 'missed',
-                     'lower', 'downgrade', 'cut', 'warning', 'weak', 'disappointing', 'halt', 'breach', 'recall',
-                     'plunge', 'crash', 'sell-off', 'offering', 'pricing', 'priced', 'public offering',
-                     'private placement', 'dilution', 'clinical hold', 'crl', 'rejected', 'failed', 'negative data',
-                     'suspended']
 
+BAD_NEWS_KEYWORDS = [
+    'lawsuit', 'fraud', 'investigation', 'subpoena', 'bankruptcy', 'insolvency',
+    'misses', 'missed', 'lower', 'downgrade', 'cut', 'warning', 'weak',
+    'disappointing', 'halt', 'breach', 'recall', 'plunge', 'crash', 'sell-off',
+    'offering', 'pricing', 'priced', 'public offering', 'private placement', 'dilution',
+    'clinical hold', 'crl', 'rejected', 'failed', 'negative data', 'suspended'
+]
+
+GOOD_NEWS_KEYWORDS = [
+    'beat', 'beats', 'higher', 'upgrade', 'raised', 'strong', 'record',
+    'partnership', 'agreement', 'approval', 'launch', 'buyback',
+    'dividend', 'surges', 'jumps', 'awarded', 'fast track', 'orphan drug', 'clearance'
+]
+
+# ==========================================
+#              KILL SWITCH
+# ==========================================
+
+class TradingGuard:
+    def __init__(self, broker_api, bot_name):
+        self.api = broker_api
+        self.bot_name = bot_name
+        self.kill_signal_path = "/tmp/kill_switch.signal"
+
+    def check_kill_switch(self):
+        # As a Linux Admin, you can trigger this via: touch /tmp/kill_switch.signal
+        if os.path.exists(self.kill_signal_path):
+            print(f"!!! {self.bot_name} KILL SWITCH ACTIVATED !!!")
+            self.execute_emergency_halt()
+
+    def execute_emergency_halt(self):
+        # 1. Cancel all outstanding orders immediately
+        try:
+            if self.api.isConnected():
+                self.api.reqGlobalCancel()
+                print("🚨 Global Cancel Sent.")
+        except Exception as e:
+            print(f"Emergency Cancel Error: {e}")
+
+        # 2. Flatten all open positions
+        try:
+            if self.api.isConnected():
+                positions = self.api.positions()
+                for pos in positions:
+                    if pos.position != 0:
+                        ticker = pos.contract.symbol
+                        qty = abs(int(pos.position))
+                        action = 'SELL' if pos.position > 0 else 'BUY'
+
+                        # Create a clean SMART contract to bypass routing errors
+                        contract = Stock(ticker, 'SMART', 'USD')
+                        self.api.qualifyContracts(contract)
+
+                        # Place Market Order
+                        market_order = MarketOrder(action, qty)
+                        self.api.placeOrder(contract, market_order)
+                        print(f"🚨 EMERGENCY LIQUIDATION: {action} {qty} {ticker} @ MARKET")
+
+                # CRITICAL: Wait 2 seconds to ensure IBKR receives the market orders before the thread dies
+                self.api.sleep(2.0)
+        except Exception as e:
+            print(f"Emergency Liquidation Error: {e}")
+
+        # 3. Log the event for the compliance audit trail
+        audit_logger.critical(json.dumps({
+            "event": "EMERGENCY_KILL_SWITCH_ACTIVATED",
+            "bot": self.bot_name,
+            "action": "reqGlobalCancel sent. All positions flattened. Thread forcefully terminated."
+        }))
+
+        # 4. Hard Exit (Kills the background thread entirely)
+        sys.exit(1)
 
 # ==========================================
 #              THEA BOT ENGINE
@@ -136,6 +252,8 @@ class TheaBot:
         print(entry)
         self.logs.append(entry)
         if len(self.logs) > 100: self.logs.pop(0)
+        with open("thea_terminal.log", "a", encoding="utf-8") as f:
+            f.write(f"{datetime.datetime.now().strftime('%Y-%m-%d')} {entry}\n")
 
     def send_telegram(self, message):
         token = self.cfg.get("telegram_bot_token")
@@ -297,17 +415,16 @@ class TheaBot:
             if not self.ib.isConnected():
                 return
 
-            # Force refresh of trades/orders to ensure local state is synced with TWS
             self.ib.reqOpenOrders()
-            # self.ib.reqPositions() # Optional, depending on if you trust the auto-update
 
             now_et = datetime.datetime.now(ET)
             date_str = now_et.strftime('%Y-%m-%d')
-            positions = self.ib.positions()
 
-            # Filter for positions we care about
+            # --- UPDATED: Switch from positions() to portfolio() to get live PnL ---
+            portfolio = self.ib.portfolio()
+
             active_positions = [
-                p for p in positions
+                p for p in portfolio
                 if p.position != 0 and p.contract.symbol in self.cfg['tickers']
             ]
 
@@ -315,79 +432,79 @@ class TheaBot:
                 return
 
             # ──────────────────────────────────────────────────
-            # TASK 1: Move Stop to Break-Even at 11:30
+            # TASK 1: 11:30 AM Time-Based Risk Management
             # ──────────────────────────────────────────────────
             if now_et.hour == 11 and now_et.minute >= 30 and now_et.hour < 15:
                 for pos in active_positions:
                     ticker = pos.contract.symbol
-                    if self.daily_run_status.get(f"{date_str}_{ticker}_be_moved"):
+
+                    # Skip if already managed today
+                    if self.daily_run_status.get(f"{date_str}_{ticker}_be_moved") or \
+                            self.daily_run_status.get(f"{date_str}_{ticker}_1130_closed"):
                         continue
 
                     qty = abs(int(pos.position))
-                    avg_cost = pos.avgCost
+                    avg_cost = pos.averageCost  # Note: PortfolioItem uses 'averageCost'
+                    unrealized_pnl = pos.unrealizedPNL
 
-                    # Find existing sell orders
                     open_trades = self.ib.openTrades()
-                    sell_trades = [
-                        t for t in open_trades
-                        if t.contract.symbol == ticker and t.order.action == 'SELL'
-                    ]
+                    sell_trades = [t for t in open_trades if t.contract.symbol == ticker and t.order.action == 'SELL']
 
+                    # --- NEW: LIQUIDATE IF AT A LOSS ---
+                    if unrealized_pnl is not None and unrealized_pnl < 0:
+                        self.log(f"📉 {ticker} is at a loss (${unrealized_pnl:.2f}). Liquidating at 11:30 AM failsafe.")
+
+                        # Cancel existing brackets
+                        for t in sell_trades: self.ib.cancelOrder(t.order)
+                        self.ib.sleep(1.0)
+
+                        exit_contract = Stock(ticker, 'SMART', 'USD')
+                        self.ib.qualifyContracts(exit_contract)
+                        action = 'SELL' if pos.position > 0 else 'BUY'
+
+                        close_order = MarketOrder(action, qty)
+                        self.ib.placeOrder(exit_contract, close_order)
+
+                        self.send_telegram(f"📉 11:30 Failsafe: Liquidated {ticker} at a loss.")
+                        self.daily_run_status[f"{date_str}_{ticker}_1130_closed"] = True
+                        continue  # Skip break-even logic, move to next ticker
+
+                    # --- EXISTING: MOVE STOP TO BREAK-EVEN IF PROFITABLE ---
                     sl_trade = next((t for t in sell_trades if t.order.orderType == 'STP'), None)
                     tp_trade = next((t for t in sell_trades if t.order.orderType == 'LMT'), None)
 
                     if sl_trade and pos.position > 0:
                         current_stop = sl_trade.order.auxPrice
 
-                        # Only move if current stop is BELOW break-even
                         if current_stop < avg_cost:
                             self.log(f"🔄 {ticker}: Re-bracketing to Break-Even...")
-
-                            # Capture current TP price
                             current_tp_price = tp_trade.order.lmtPrice if tp_trade else round(
                                 avg_cost * (1 + self.cfg['tp_target_percent']), 2)
 
-                            # Cancel existing orders
-                            for t in sell_trades:
-                                self.ib.cancelOrder(t.order)
-
-                            self.ib.sleep(1.0)  # Wait for unlock
+                            for t in sell_trades: self.ib.cancelOrder(t.order)
+                            self.ib.sleep(1.0)
 
                             new_oca_group = f'OCA_BE_{ticker}_{datetime.datetime.now().strftime("%H%M%S")}'
-
-                            # --- FIX: FORCE SMART ROUTING TO BYPASS WARNING 10311 ---
-                            # Create a clean SMART contract for the exit orders
                             exit_contract = Stock(ticker, 'SMART', 'USD')
                             self.ib.qualifyContracts(exit_contract)
 
-                            # Stage New Take Profit
-                            new_tp = Order(
-                                action='SELL', orderType='LMT', lmtPrice=current_tp_price,
-                                totalQuantity=qty, ocaGroup=new_oca_group, ocaType=1,
-                                tif='GTC', transmit=False
-                            )
+                            new_tp = Order(action='SELL', orderType='LMT', lmtPrice=current_tp_price, totalQuantity=qty,
+                                           ocaGroup=new_oca_group, ocaType=1, tif='GTC', transmit=False)
+                            new_sl = Order(action='SELL', orderType='STP', auxPrice=round(avg_cost, 2),
+                                           totalQuantity=qty, ocaGroup=new_oca_group, ocaType=1, tif='GTC',
+                                           transmit=False)
 
-                            # Stage New Break-Even Stop Loss
-                            new_sl = Order(
-                                action='SELL', orderType='STP', auxPrice=round(avg_cost, 2),
-                                totalQuantity=qty, ocaGroup=new_oca_group, ocaType=1,
-                                tif='GTC', transmit=False
-                            )
-
-                            # Submit using the SMART contract
                             self.ib.placeOrder(exit_contract, new_tp)
                             self.ib.placeOrder(exit_contract, new_sl)
-
                             self.ib.sleep(0.5)
 
-                            # Trigger Transmit
                             new_sl.transmit = True
                             self.ib.placeOrder(exit_contract, new_sl)
 
                             self.log(f"✅ {ticker} Stop → Break-Even @ {avg_cost:.2f} (SMART Routed)")
                             self.send_telegram(f"🔒 {ticker} Stop moved to break-even @ ${avg_cost:.2f}")
-
                             self.daily_run_status[f"{date_str}_{ticker}_be_moved"] = True
+
 
             # ──────────────────────────────────────────────────
             # TASK 2: Force Close All Positions at EOD (3:55 PM)
@@ -443,13 +560,24 @@ class TheaBot:
         self.ib = IB()
         self.log("Engine Started.")
 
+        # 1. Instantiate the Guard outside the loop
+        guard = TradingGuard(self.ib, "THEA")
+
+        # 2. SINGLE UNIFIED LOOP
         while self.running:
             try:
-                now_et = datetime.datetime.now(ET)  # Use ET timezone
+                # --- KILL SWITCH CHECK ---
+                guard.check_kill_switch()
+
+                now_et = datetime.datetime.now(ET)
                 date_str = now_et.strftime('%Y-%m-%d')
 
                 # --- TIME WINDOW LOGIC ---
-                start_time = now_et.replace(hour=9, minute=30, second=0, microsecond=0)
+                start_time = now_et.replace(
+                    hour=self.cfg.get('trade_hour', 9),
+                    minute=self.cfg.get('trade_minute', 47),
+                    second=0, microsecond=0
+                )
                 end_time = now_et.replace(hour=11, minute=30, second=0, microsecond=0)
                 market_close = now_et.replace(hour=16, minute=0, second=0, microsecond=0)
 
@@ -459,14 +587,13 @@ class TheaBot:
                 if 0 <= now_et.weekday() <= 4 and start_time <= now_et <= end_time and not self.daily_run_status.get(
                         date_str):
                     try:
-                        # Ensure connection
                         if not self.ib.isConnected():
                             self.ib.connect(self.cfg['ibkr_host'], self.cfg['ibkr_port'],
                                             clientId=self.cfg['ibkr_client_id'])
 
                         tickers = self.cfg.get('tickers', [])
-
                         signals = []
+
                         for t in tickers:
                             if not self.running: break
                             c = self.create_contract(t)
@@ -474,22 +601,15 @@ class TheaBot:
                             res = self.check_entry_signal(t, c)
                             if res:
                                 signals.append({'ticker': t, 'contract': c, 'entry': res[0], 'gap': res[1]})
-                                # Explainability Log
-                                audit_logger.info(
-                                    json.dumps({
-                                        "action": "SIGNAL_GENERATED",
-                                        "ticker": t,
-                                        "prev_close": res[0],
-                                        "gap_ratio": round(res[1], 4),
-                                        "threshold_used": self.cfg['gap_entry_threshold'],
-                                        "reason": f"Gap of {res[1]:.2%} passed threshold of {self.cfg['gap_entry_threshold']:.2%}"
-                                    })
-                                )
+                                audit_logger.info(json.dumps({
+                                    "action": "SIGNAL_GENERATED", "ticker": t, "prev_close": res[0],
+                                    "gap_ratio": round(res[1], 4), "threshold_used": self.cfg['gap_entry_threshold'],
+                                    "reason": f"Gap passed threshold"
+                                }))
                             time.sleep(0.5)
 
                         if signals:
                             self.log(f"Found {len(signals)} valid signals. Executing...")
-
                             split_alloc = self.cfg['total_capital'] / len(signals)
                             max_alloc = self.cfg['total_capital'] * 0.20
                             final_alloc = min(split_alloc, max_alloc)
@@ -499,8 +619,6 @@ class TheaBot:
 
                             self.daily_run_status[date_str] = True
                         else:
-                            # Log once that we completed the scan with no signals
-                            # Only log on first scan attempt to avoid spam
                             scan_key = f"{date_str}_scan_complete"
                             if not self.daily_run_status.get(scan_key):
                                 self.log(f"📊 Scan Complete: No valid gap signals found in {len(tickers)} tickers")
@@ -511,10 +629,9 @@ class TheaBot:
                         if self.ib.isConnected(): self.ib.disconnect()
 
                 # ═══════════════════════════════════════════════════
-                # POSITION MANAGEMENT (11:30 onwards until market close)
+                # POSITION MANAGEMENT (11:30 onwards)
                 # ═══════════════════════════════════════════════════
                 if 0 <= now_et.weekday() <= 4 and now_et >= end_time and now_et < market_close:
-                    # This runs every loop iteration after 11:30 to monitor positions
                     self.manage_open_positions()
 
                 # ═══════════════════════════════════════════════════
@@ -535,12 +652,17 @@ class TheaBot:
                     except:
                         pass
 
-                # Wait before next scan loop (15 seconds)
-                time.sleep(15)
+                self.ib.sleep(15)
 
             except Exception as e:
                 self.log(f"Loop Crash: {e}")
-                time.sleep(10)
+                self.ib.sleep(10)
+        # ──────────────────────────────────────────────────
+        # CLEANUP: Executes only when self.running becomes False
+        # ──────────────────────────────────────────────────
+        if self.ib and self.ib.isConnected():
+            self.ib.disconnect()
+            self.log("🛑 Engine Stopped. Disconnected from IBKR successfully.")
 
     def start(self):
         if not self.running:
@@ -553,149 +675,333 @@ class TheaBot:
 
 
 # ==========================================
-#              TESSA BOT ENGINE
+#              TESSA BOT ENGINE (AUTONOMOUS)
 # ==========================================
+def get_gap_down_stocks(threshold_pct):
+    url = "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved"
+    params = {"formatted": "false", "lang": "en-US", "region": "US", "scrIds": "day_losers", "count": "50"}
+    headers = {"User-Agent": "Mozilla/5.0"}
+    try:
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+        quotes = response.json()['finance']['result'][0]['quotes']
+        signals = []
+        for q in quotes:
+            change_pct = q.get('regularMarketChangePercent', 0)
+            if change_pct <= threshold_pct:
+                signals.append(
+                    {'ticker': q.get('symbol'), 'price': q.get('regularMarketPrice', 0), 'change_pct': change_pct})
+        return signals
+    except Exception as e:
+        print(f"⚠️ Scanner Error: {e}")
+        return []
+
+
+def fetch_finviz_news(ticker):
+    url = f"https://finviz.com/quote.ashx?t={ticker}"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        soup = BeautifulSoup(response.text, 'lxml')
+        news_table = soup.find(id='news-table')
+        if not news_table: return []
+        return [{'title': row.a.text} for row in news_table.find_all('tr')[:5] if row.a]
+    except:
+        return []
+
+
+def assess_stock(ticker, cfg, log_func) -> bool:
+    log_func(f"🔎 Analyzing Risk Profile: {ticker}")
+    try:
+        t = yf.Ticker(ticker)
+        hist = t.history(period="3mo")
+        if hist.empty or len(hist) < 2:
+            log_func(f"   ❌ Rejected: Insufficient historical data")
+            return False
+
+        if hist['Close'].iloc[-1] < 10.0:
+            log_func(f"   ❌ Rejected: Price below $10 (${hist['Close'].iloc[-1]:.2f})")
+            return False
+
+        yellow_flags = 0
+        median_vol = hist.iloc[:-1]['Volume'].median()
+        if median_vol < cfg['min_avg_volume']:
+            log_func(f"   ❌ Rejected: Low Volume ({median_vol:,.0f})")
+            return False
+        elif median_vol <= 1_000_000:
+            yellow_flags += 1
+
+        hist['Range_Pct'] = (hist['High'] - hist['Low']) / hist['Open'] * 100
+        avg_vol = hist['Range_Pct'].mean()
+        if avg_vol < cfg['min_volatility_pct']:
+            log_func(f"   ❌ Rejected: Low Volatility ({avg_vol:.2f}%)")
+            return False
+        elif avg_vol < 2.5:
+            yellow_flags += 1
+
+        try:
+            earnings = t.earnings_history
+            if earnings is not None and not earnings.empty:
+                surprises = earnings.tail(4)['surprisePercent'].dropna()
+                if not surprises.empty:
+                    beats = sum(surprises > 0)
+                    if beats <= 1:
+                        log_func(f"   ❌ Rejected: Weak Earnings History (<=1 Beat)")
+                        return False
+                    elif beats == 2:
+                        yellow_flags += 1
+        except:
+            pass
+
+        news = fetch_finviz_news(ticker)
+        if sum(1 for item in news for kw in BAD_NEWS_KEYWORDS if kw in item.get('title', '').lower()) > 0:
+            log_func(f"   ❌ Rejected: Dangerous Dilution/Negative News Detected.")
+            return False
+
+        if yellow_flags >= 2:
+            log_func(f"   ❌ Rejected: Accumulated {yellow_flags} mediocre (yellow) metrics.")
+            return False
+
+        log_func(f"   ✅ APPROVED: {ticker} passed strict LOW RISK filters.")
+        return True
+    except Exception as e:
+        log_func(f"   ⚠️ Assessment Error for {ticker}: {e}")
+        return False
+
+
 class TessaBot:
     def __init__(self):
+        self.ib = None
         self.running = False
         self.thread = None
+        self.daily_run_status = {}
         self.logs = []
-        self.ib = None
         self.cfg = TessaConfig().model_dump()
 
     def update_config(self, config_dict):
         self.cfg.update(config_dict)
-        self.log(f"[Tessa] Config updated for {self.cfg['ticker']}")
+        self.log("Config updated.")
 
-    def log(self, message):
-        timestamp = datetime.datetime.now().strftime("%H:%M:%S")
-        entry = f"[Tessa] [{timestamp}] {message}"
+    def connect(self):
+        if not self.ib.isConnected():
+            self.ib.connect(self.cfg['ibkr_host'], self.cfg['ibkr_port'], clientId=self.cfg['ibkr_client_id'])
+
+    def log(self, msg):
+        ts = datetime.datetime.now(ET).strftime('%H:%M:%S')
+        entry = f"[Tessa] [{ts}] {msg}"
         print(entry)
         self.logs.append(entry)
-        thea_bot.logs.append(entry)
+        if len(self.logs) > 100: self.logs.pop(0)
+        with open("tessa_terminal.log", "a", encoding="utf-8") as f:
+            f.write(f"{datetime.datetime.now(ET).strftime('%Y-%m-%d')} {entry}\n")
 
-    def send_telegram(self, message):
-        pass  # Optional implementation
+    def place_dual_bracket(self, ticker, current_price):
+        contract = Stock(ticker, 'SMART', 'USD')
+        self.ib.qualifyContracts(contract)
 
-    def submit_limit_with_bracket(self, contract, limit_price, quantity, label):
-        if quantity == 0: return None, None
-        tp_price = round(limit_price * (1 + self.cfg['tp_pct'] / 100), 2)
+        entry1 = round(current_price, 2)
+        qty1 = int(self.cfg['allocation_per_order'] // entry1)
 
-        # --- LAYER 1: GTD ---
-        expiry_str = datetime.datetime.now().strftime("%Y%m%d") + " 11:30:00"
+        entry2 = round(current_price * self.cfg['entry_2_offset_pct'], 2)
+        qty2 = int(self.cfg['allocation_per_order'] // entry2)
+
+        # --- NEW: ENFORCE PILOT MODE ---
+        if self.cfg.get('pilot_mode'):
+            self.log(f"🛡️ PILOT MODE ACTIVE: Reducing {ticker} orders to 1 share.")
+            qty1 = 1
+            qty2 = 1
+
+        if qty1 > 0: self._submit_bracket(contract, ticker, entry1, qty1, "LMT1_OPEN")
+        if qty2 > 0: self._submit_bracket(contract, ticker, entry2, qty2, "LMT2_DIP")
+
+    def _submit_bracket(self, contract, ticker, entry_price, qty, label):
+        tp_price = round(entry_price * self.cfg['tessa_take_profit_pct'], 2)
+        sl_price = round(entry_price * self.cfg['tessa_stop_loss_pct'], 2)
+
+        # --- NEW: Native 11:30 AM Auto-Cancel (Matches Thea exactly) ---
+        expiry_str = datetime.datetime.now(ET).strftime("%Y%m%d") + " 11:30:00"
 
         parent = Order(
-            action='BUY', orderType='LMT', totalQuantity=quantity, lmtPrice=limit_price,
+            action='BUY', orderType='LMT', totalQuantity=qty, lmtPrice=entry_price,
             tif='GTD', goodTillDate=expiry_str, transmit=False
         )
         trade = self.ib.placeOrder(contract, parent)
         self.ib.sleep(0.5)
 
-        if not trade.order.orderId: return None, None
+        if not trade.order.orderId: return
         parent_id = trade.order.orderId
-        oca_group = f'OCA_{self.cfg["ticker"]}_{label}_{datetime.datetime.now().strftime("%H%M%S")}'
+        oca = f"OCA_{ticker}_{label}_{parent_id}"
 
-        profit = Order(action='SELL', orderType='LMT', totalQuantity=quantity, lmtPrice=tp_price, parentId=parent_id,
-                       ocaGroup=oca_group, ocaType=1, tif='GTC', transmit=False)
-        initial_trail = Order(action='SELL', orderType='TRAIL', totalQuantity=quantity,
-                              trailingPercent=self.cfg['initial_trail_pct'], parentId=parent_id, ocaGroup=oca_group,
-                              ocaType=1, tif='GTC', transmit=True)
+        # Ensure children are GTC so they remain active after the parent fills
+        profit = Order(action='SELL', orderType='LMT', totalQuantity=qty, lmtPrice=tp_price, parentId=parent_id, ocaGroup=oca, ocaType=1, tif='GTC', transmit=False)
+        loss = Order(action='SELL', orderType='STP', auxPrice=sl_price, totalQuantity=qty, parentId=parent_id, ocaGroup=oca, ocaType=1, tif='GTC', transmit=True)
 
         self.ib.placeOrder(contract, profit)
-        trail_trade = self.ib.placeOrder(contract, initial_trail)
+        self.ib.placeOrder(contract, loss)
+        self.log(f"🟢 Placed {label} for {ticker}: Entry ${entry_price} | TP ${tp_price} | SL ${sl_price}")
 
-        # Verify the trailing stop actually registered
-        self.ib.sleep(1)
-        open_orders = self.ib.openOrders()
-        trail_confirmed = any(
-            o.orderId == trail_trade.order.orderId for o in open_orders
-        )
+    def manage_positions(self):
+        if not self.ib.isConnected(): return
+        now = datetime.datetime.now(ET)
+        date_str = now.strftime('%Y-%m-%d')
 
-        if not trail_confirmed:
-            self.log(f"🚨 CRITICAL: Trail stop for {label} failed to register. Cancelling entry.")
-            self.ib.cancelOrder(parent)
-            return None, None
+        traded_today = self.daily_run_status.get(f"{date_str}_traded_tickers", set())
 
-        self.log(f"{label} Submitted: Buy {quantity} @ {limit_price} (Exp 11:30)")
-        return parent_id, trail_trade.order.orderId
+        # --- UPDATED: Switch from positions() to portfolio() to get live PnL ---
+        portfolio = self.ib.portfolio()
+        positions = [p for p in portfolio if p.position != 0 and p.contract.symbol in traded_today]
 
-    async def update_trailing_stop_logic(self, parent_id, old_trail_id, quantity, label, contract):
-        delay = self.cfg['delay_sec']
-        self.log(f"{label} Waiting {delay}s to tighten stop...")
+        if now.hour == 11 and now.minute >= 30 and now.hour < 15:
+            # --- EXISTING: CANCEL UNFILLED BUY ORDERS ---
+            if not self.daily_run_status.get(f"{date_str}_unfilled_cancelled"):
+                cancelled_count = 0
+                for trade in self.ib.openTrades():
+                    if trade.contract.symbol in traded_today and trade.order.action == 'BUY' and trade.orderStatus.status in [
+                        'Submitted', 'PreSubmitted']:
+                        self.ib.cancelOrder(trade.order)
+                        self.log(f"⏰ 11:30 Failsafe: Cancelled unfilled entry for {trade.contract.symbol}")
+                        cancelled_count += 1
 
-        # Check periodically if we passed 11:30 while waiting
-        for _ in range(delay):
-            if not self.running: return
+                if cancelled_count > 0: self.ib.sleep(2.0)
+                self.daily_run_status[f"{date_str}_unfilled_cancelled"] = True
 
-            # --- LAYER 2: FAILSAFE CLEANUP FOR TESSA ---
-            now = datetime.datetime.now()
-            if now.hour == 11 and now.minute >= 30:
-                # Check if parent is still pending
-                trades = self.ib.openTrades()
-                for t in trades:
-                    if t.order.orderId == parent_id and t.orderStatus.status in ['Submitted', 'PreSubmitted']:
-                        self.ib.cancelOrder(t.order)
-                        self.log(f"⏰ 11:30 Failsafe: Cancelled {label}")
-                        return
+            # --- 11:30 AM POSITION LOGIC ---
+            for pos in positions:
+                ticker = pos.contract.symbol
 
-            await asyncio.sleep(1)
+                # Skip if already managed today
+                if self.daily_run_status.get(f"{date_str}_{ticker}_be_moved") or \
+                        self.daily_run_status.get(f"{date_str}_{ticker}_1130_closed"):
+                    continue
 
-        trades = self.ib.trades()
-        is_filled = any(t.order.orderId == parent_id and t.orderStatus.status == 'Filled' for t in trades)
+                avg_cost = pos.averageCost  # Note: PortfolioItem uses 'averageCost'
+                unrealized_pnl = pos.unrealizedPNL
 
-        if is_filled:
-            new_trail = Order(action='SELL', orderType='TRAIL', totalQuantity=quantity,
-                              trailingPercent=self.cfg['final_trail_pct'], parentId=parent_id, tif='GTC', transmit=True)
-            try:
-                # Cancel the old trailing stop first
-                old_orders = [t.order for t in self.ib.openTrades()
-                              if t.order.orderId == old_trail_id]
-                if old_orders:
-                    self.ib.cancelOrder(old_orders[0])
-                    self.ib.sleep(0.5)
-                else:
-                    self.log(f"{label} Old trail order not found - may already be filled/cancelled")
-                    return
+                sell_trades = [t for t in self.ib.openTrades() if
+                               t.contract.symbol == ticker and t.order.action == 'SELL']
 
-                self.ib.placeOrder(contract, new_trail)
-                self.log(f"{label} STOP TIGHTENED to {self.cfg['final_trail_pct']}%")
-            except Exception as e:
-                self.log(f"{label} Update Failed: {e}")
+                # --- NEW: LIQUIDATE IF AT A LOSS ---
+                if unrealized_pnl is not None and unrealized_pnl < 0:
+                    self.log(f"📉 {ticker} is at a loss (${unrealized_pnl:.2f}). Liquidating at 11:30 AM failsafe.")
+                    for t in sell_trades: self.ib.cancelOrder(t.order)
+                    self.ib.sleep(1.0)
 
-    def run_strategy(self):
+                    exit_contract = Stock(ticker, 'SMART', 'USD')
+                    self.ib.qualifyContracts(exit_contract)
+                    action = 'SELL' if pos.position > 0 else 'BUY'
+
+                    self.ib.placeOrder(exit_contract, MarketOrder(action, abs(pos.position)))
+                    self.daily_run_status[f"{date_str}_{ticker}_1130_closed"] = True
+                    continue  # Skip break-even logic, move to next ticker
+
+                # --- EXISTING: MOVE STOP TO BREAK-EVEN IF PROFITABLE ---
+                sl_trade = next((t for t in sell_trades if t.order.orderType == 'STP'), None)
+                if sl_trade and sl_trade.order.auxPrice < avg_cost:
+                    self.log(f"🔄 Moving {ticker} Stop Loss to Break-Even (${avg_cost:.2f})")
+                    for t in sell_trades: self.ib.cancelOrder(t.order)
+                    self.ib.sleep(1.0)
+
+                    exit_contract = Stock(ticker, 'SMART', 'USD')
+                    self.ib.qualifyContracts(exit_contract)
+                    new_sl = Order(action='SELL', orderType='STP', auxPrice=round(avg_cost, 2),
+                                   totalQuantity=abs(pos.position), transmit=True)
+                    self.ib.placeOrder(exit_contract, new_sl)
+                    self.daily_run_status[f"{date_str}_{ticker}_be_moved"] = True
+
+        # ... [Keep the 15:55 EOD Liquidation block exactly as it is below this] ...
+
+        if now.hour == 15 and now.minute >= 55:
+            for pos in positions:
+                ticker = pos.contract.symbol
+                if self.daily_run_status.get(f"{date_str}_{ticker}_eod_closed"): continue
+
+                self.log(f"⏰ EOD Liquidation: Flattening {ticker}")
+                for t in self.ib.openTrades():
+                    if t.contract.symbol == ticker: self.ib.cancelOrder(t.order)
+                self.ib.sleep(1.0)
+
+                exit_contract = Stock(ticker, 'SMART', 'USD')
+                self.ib.qualifyContracts(exit_contract)
+                action = 'SELL' if pos.position > 0 else 'BUY'
+                self.ib.placeOrder(exit_contract, MarketOrder(action, abs(pos.position)))
+                self.daily_run_status[f"{date_str}_{ticker}_eod_closed"] = True
+
+    def run_loop(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         self.ib = IB()
-        try:
-            self.ib.connect(self.cfg['ibkr_host'], self.cfg['ibkr_port'], clientId=self.cfg['ibkr_client_id'])
-            contract = Stock(self.cfg['ticker'], 'SMART', 'USD')
-            self.ib.qualifyContracts(contract)
+        self.connect()
+        self.log("Autonomous Engine Started.")
 
-            qty1 = int(self.cfg['trade_amount_usd'] // self.cfg['limit_1_price'])
-            qty2 = int(self.cfg['trade_amount_usd'] // self.cfg['limit_2_price'])
+        # 1. Instantiate the Guard outside the loop
+        guard = TradingGuard(self.ib, "TESSA")
 
-            p1, t1 = self.submit_limit_with_bracket(contract, self.cfg['limit_1_price'], qty1, "ENTRY 1")
-            p2, t2 = self.submit_limit_with_bracket(contract, self.cfg['limit_2_price'], qty2, "ENTRY 2")
+        # 2. SINGLE UNIFIED LOOP
+        while self.running:
+            try:
+                # --- KILL SWITCH CHECK ---
+                guard.check_kill_switch()
 
-            async def async_main():
-                tasks = []
-                if p1 and t1: tasks.append(self.update_trailing_stop_logic(p1, t1, qty1, "ENTRY 1", contract))
-                if p2 and t2: tasks.append(self.update_trailing_stop_logic(p2, t2, qty2, "ENTRY 2", contract))
-                if tasks: await asyncio.gather(*tasks)
+                now = datetime.datetime.now(ET)
+                date_str = now.strftime('%Y-%m-%d')
+                market_open = now.replace(hour=9, minute=30, second=15, microsecond=0)
+                scan_cutoff = now.replace(hour=10, minute=0, second=0, microsecond=0)
 
-            loop.run_until_complete(async_main())
-        except Exception as e:
-            self.log(f"Tessa Error: {e}")
-        finally:
-            if self.ib.isConnected(): self.ib.disconnect()
-            self.running = False
-            loop.close()
+                # --- 1. MORNING SCAN & EXECUTION ---
+                if 0 <= now.weekday() <= 4 and market_open <= now <= scan_cutoff:
+                    if not self.daily_run_status.get(f"{date_str}_scanned"):
+
+                        gappers = get_gap_down_stocks(self.cfg['scanner_gap_down_threshold'])
+                        self.log(
+                            f"📡 Market Scan: Found {len(gappers)} stocks gapping down worse than {self.cfg['scanner_gap_down_threshold']}%.")
+
+                        if not gappers:
+                            self.log("📊 Scan Complete: 0 gap-down candidates found. No trades today.")
+                        else:
+                            # Pass self.log into the assess_stock function
+                            approved_tickers = [s for s in gappers if assess_stock(s['ticker'], self.cfg, self.log)]
+
+                            if approved_tickers:
+                                approved_tickers = sorted(approved_tickers, key=lambda x: x['change_pct'])[
+                                    :self.cfg['max_trades']]
+                                self.log(f"Executing trades for top {len(approved_tickers)} approved targets.")
+
+                                approved_symbols = [t['ticker'] for t in approved_tickers]
+                                self.log(f"✅ Approved targets for {date_str}: {', '.join(approved_symbols)}")
+
+                                if f"{date_str}_traded_tickers" not in self.daily_run_status:
+                                    self.daily_run_status[f"{date_str}_traded_tickers"] = set()
+
+                                for target in approved_tickers:
+                                    self.daily_run_status[f"{date_str}_traded_tickers"].add(target['ticker'])
+                                    self.place_dual_bracket(target['ticker'], target['price'])
+                            else:
+                                self.log("📊 Scan Complete: 0 stocks passed the strict risk filters today.")
+
+                        # Mark scan as complete so it doesn't loop again today
+                        self.daily_run_status[f"{date_str}_scanned"] = True
+
+                # --- 2. POSITION MANAGEMENT ---
+                if 0 <= now.weekday() <= 4 and now.hour >= 11:
+                    self.manage_positions()
+
+                self.ib.sleep(15)
+
+            except Exception as e:
+                self.log(f"Loop Error: {e}")
+                self.ib.sleep(10)
+
+        # ──────────────────────────────────────────────────
+        # CLEANUP: Executes only when self.running becomes False
+        # ──────────────────────────────────────────────────
+        if self.ib and self.ib.isConnected():
+            self.ib.disconnect()
+            self.log("🛑 Engine Stopped. Disconnected from IBKR successfully.")
 
     def start(self):
-        if self.running: return
-        self.running = True
-        self.thread = threading.Thread(target=self.run_strategy, daemon=True)
-        self.thread.start()
+        if not self.running:
+            self.running = True
+            self.thread = threading.Thread(target=self.run_loop, daemon=True)
+            self.thread.start()
 
     def stop(self):
         self.running = False
@@ -757,7 +1063,8 @@ def get_status():
     return {
         "thea_running": thea_bot.running,
         "tessa_running": tessa_bot.running,
-        "logs": thea_bot.logs,
+        "thea_logs": thea_bot.logs,
+        "tessa_logs": tessa_bot.logs,
         "risk_logs": state_risk_logs
     }
 
@@ -775,32 +1082,32 @@ async def analyze_risk(req: RiskRequest):
     return {"status": "Analysis Started"}
 
 
-@app.post("/start/thea")
+@app.post("/start/thea", dependencies=[Depends(verify_token)])
 def start_thea():
     thea_bot.start()
     return {"status": "Started"}
 
 
-@app.post("/stop/thea")
+@app.post("/stop/thea", dependencies=[Depends(verify_token)])
 def stop_thea():
     thea_bot.stop()
     return {"status": "Stopped"}
 
 
-@app.post("/start/tessa")
+@app.post("/start/tessa", dependencies=[Depends(verify_token)])
 def start_tessa(config: TessaConfig):
     tessa_bot.update_config(config.model_dump())
     tessa_bot.start()
     return {"status": "Started"}
 
 
-@app.post("/stop/tessa")
+@app.post("/stop/tessa", dependencies=[Depends(verify_token)])
 def stop_tessa():
     tessa_bot.stop()
     return {"status": "Stopped"}
 
 
-@app.get("/config")
+@app.get("/config", dependencies=[Depends(verify_token)])
 def get_config():
     if not os.path.exists("user_config.json"): return {"thea": TheaConfig().model_dump(), "tessa": {}}
     with open("user_config.json", "r") as f: return json.load(f)
