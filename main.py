@@ -7,45 +7,81 @@ COMPLIANCE STATUS: DMCC / JCA AUDIT READY
 DESCRIPTION: Automated equity execution with hard-coded pre-trade controls.
 =============================================================================
 """
-import uvicorn
-import json
-import os
-import datetime
-import logging
-import threading
-import time
-import requests
-import asyncio
-import nest_asyncio
+import os, sys, json, datetime, logging, threading, time, requests, asyncio, nest_asyncio
 import pandas as pd
 import numpy as np
 import yfinance as yf
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-import os
-import sys
-
-
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import List, Optional
 from ib_insync import *
 from zoneinfo import ZoneInfo
-
 import jwt
-import requests
-from fastapi import Depends, HTTPException, Security
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import boto3
+import uvicorn
+from botocore.exceptions import ClientError
 
-# --- AUTH0 SECURITY SETUP ---
-AUTH0_DOMAIN = "dev-q3zq2aoinxvy085j.us.auth0.com"
-API_AUDIENCE = "https://api.sevendimensions.com"
-ALGORITHMS = ["RS256"]
-security = HTTPBearer()
 
-# 1. Determine the mode (Defaults to TEST for safety)
+def get_secrets_by_path():
+    """
+    Fetches all parameters from the SSM hierarchy (Auth, Compliance, Engine).
+    This is the 'Free' and 'Path-Compatible' method for your audit setup.
+    """
+    # Initialize the SSM client (ensure region matches your EC2)
+    ssm = boto3.client('ssm', region_name="us-east-1")
+
+    # The root path you've organized in the AWS Console
+    base_path = "/SevenDimensions/PROD/"
+
+    try:
+        # 'Recursive=True' allows it to find /Auth, /Compliance, and /TradingEngine
+        response = ssm.get_parameters_by_path(
+            Path=base_path,
+            Recursive=True,
+            WithDecryption=True
+        )
+
+        # Mapping logic: Removes the path prefix so main.py sees the raw Key
+        # Example: '/SevenDimensions/PROD/Auth/AUTH0_DOMAIN' becomes 'AUTH0_DOMAIN'
+        secrets = {p['Name'].split('/')[-1]: p['Value'] for p in response['Parameters']}
+
+        if not secrets:
+            print(f"⚠️ WARNING: No parameters found at {base_path}")
+
+        return secrets
+
+    except Exception as e:
+        print(f"❌ SSM Path Fetch Error: {e}")
+        raise e
+
+# --- 2. DUAL-MODE CONFIGURATION ---
 ENV_MODE = os.getenv("ENV_MODE", "TEST").upper()
+
+if ENV_MODE == "PROD":
+    print("🚀 PROD MODE: Fetching secrets from AWS Secrets Manager...")
+    try:
+        secrets = get_secrets_by_path()
+        for key, value in secrets.items():
+            os.environ[key] = str(value)
+    except Exception as e:
+        print(f"❌ SECRET FETCH FAILED: {e}")
+        sys.exit(1)
+else:
+    # This only prints ONCE now
+    print("🛠️ TEST MODE: Loading local trading.env...")
+    load_dotenv('trading.env')
+
+# --- 3. DYNAMIC CONSTANTS (Loaded after environment is set) ---
+AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+API_AUDIENCE = os.getenv("API_AUDIENCE")
+ALGORITHMS = os.getenv("ALGORITHMS", "RS256").split(",")
+SYSTEM_OWNER = os.getenv('SYSTEM_OWNER', 'Joel Faucher')
+
+security = HTTPBearer()
 
 if ENV_MODE == "PROD":
     print("🚀 PROD MODE: Fetching secrets from AWS Secrets Manager...")
@@ -55,11 +91,6 @@ if ENV_MODE == "PROD":
 else:
     print("🛠️ TEST MODE: Loading local trading.env...")
     load_dotenv('trading.env')
-
-# 2. Address Audit Finding: Operator Identity
-# Move your name out of the source code and into the environment
-SYSTEM_OWNER = os.getenv('SYSTEM_OWNER', 'Joel Faucher')
-
 
 def verify_token(credentials: HTTPAuthorizationCredentials = Security(security)):
     """Validates the JWT token against Auth0's public keys."""
@@ -105,7 +136,6 @@ ET = ZoneInfo("America/New_York")
 
 # --- 1. SETUP & CONFIG ---
 nest_asyncio.apply()
-load_dotenv('trading.env')  # Ensure env vars are loaded
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("TradingServer")
@@ -1060,9 +1090,10 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://trading.sevendimensions.com",  # Your production domain
-        "http://localhost:3000",                # Standard React port
-        "http://localhost:5173"                 # Standard Vite port
+        "https://trading.sevendimensions.com",
+        "http://3.236.9.252",  # Add your EC2 IP here
+        "http://localhost:3000",
+        "http://localhost:5173"
     ],
     allow_credentials=True,
     allow_methods=["*"],  # Safely allow all standard methods (GET, POST, OPTIONS)
